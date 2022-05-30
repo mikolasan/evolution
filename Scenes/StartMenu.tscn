@@ -1,0 +1,35 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Resources/Menu.theme" type="Theme" id=1]
+[ext_resource path="res://Scenes/StartMenu.gd" type="Script" id=2]
+
+[node name="Start" type="Node2D"]
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_horizontal_guides_": [ 752.0 ]
+}
+
+[node name="ColorRect" type="ColorRect" parent="."]
+margin_right = 1680.0
+margin_bottom = 1050.0
+rect_pivot_offset = Vector2( -136, 24 )
+color = Color( 0.227451, 0.25098, 0.278431, 1 )
+
+[node name="DayShift" type="Button" parent="."]
+margin_left = 267.0
+margin_top = 752.0
+margin_right = 717.0
+margin_bottom = 844.0
+theme = ExtResource( 1 )
+text = "DAY SHIFT"
+
+[node name="NightShift" type="Button" parent="."]
+margin_left = 1020.0
+margin_top = 752.0
+margin_right = 1470.0
+margin_bottom = 844.0
+theme = ExtResource( 1 )
+text = "NIGHT SHIFT"
+
+[connection signal="pressed" from="DayShift" to="." method="on_day_shift_pressed"]
+[connection signal="pressed" from="NightShift" to="." method="on_night_shift_pressed"]
