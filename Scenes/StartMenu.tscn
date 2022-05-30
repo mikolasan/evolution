@@ -9,7 +9,7 @@ __meta__ = {
 "_edit_horizontal_guides_": [ 752.0 ]
 }
 
-[node name="ColorRect" type="ColorRect" parent="."]
+[node name="Background" type="ColorRect" parent="."]
 margin_right = 1680.0
 margin_bottom = 1050.0
 rect_pivot_offset = Vector2( -136, 24 )
@@ -30,6 +30,40 @@ margin_right = 1470.0
 margin_bottom = 844.0
 theme = ExtResource( 1 )
 text = "NIGHT SHIFT"
+
+[node name="DayBackground" type="ColorRect" parent="."]
+margin_left = 154.0
+margin_top = 133.0
+margin_right = 811.0
+margin_bottom = 690.0
+rect_pivot_offset = Vector2( -136, 24 )
+color = Color( 0.521569, 0.129412, 0.603922, 1 )
+
+[node name="DayDescription" type="Label" parent="."]
+margin_left = 154.0
+margin_top = 133.0
+margin_right = 811.0
+margin_bottom = 660.0
+theme = ExtResource( 1 )
+text = "Develop good traits in the population that will help them to survive any cataclysm "
+autowrap = true
+
+[node name="NightBackground" type="ColorRect" parent="."]
+margin_left = 916.0
+margin_top = 133.0
+margin_right = 1573.0
+margin_bottom = 690.0
+rect_pivot_offset = Vector2( -136, 24 )
+color = Color( 0.25098, 0.0980392, 0.243137, 1 )
+
+[node name="NightDescription" type="Label" parent="."]
+margin_left = 916.0
+margin_top = 133.0
+margin_right = 1577.0
+margin_bottom = 660.0
+theme = ExtResource( 1 )
+text = "Prove that life is fragile and nothing can live forever and even small distress can lead to a full extinction"
+autowrap = true
 
 [connection signal="pressed" from="DayShift" to="." method="on_day_shift_pressed"]
 [connection signal="pressed" from="NightShift" to="." method="on_night_shift_pressed"]

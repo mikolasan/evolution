@@ -1,0 +1,31 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Resources/Menu.theme" type="Theme" id=1]
+[ext_resource path="res://Scenes/Lab.gd" type="Script" id=2]
+
+[node name="Lab" type="Node2D"]
+script = ExtResource( 2 )
+
+[node name="Background" type="ColorRect" parent="."]
+margin_right = 1680.0
+margin_bottom = 1050.0
+rect_pivot_offset = Vector2( -136, 24 )
+color = Color( 0.227451, 0.25098, 0.278431, 1 )
+
+[node name="Menu" type="Button" parent="."]
+margin_left = 48.0
+margin_top = 50.0
+margin_right = 498.0
+margin_bottom = 142.0
+theme = ExtResource( 1 )
+text = "MENU"
+
+[node name="PlayerShift" type="Label" parent="."]
+margin_left = 48.0
+margin_top = 210.0
+margin_right = 88.0
+margin_bottom = 302.0
+theme = ExtResource( 1 )
+text = "DAY SHIFT"
+
+[connection signal="pressed" from="Menu" to="." method="on_menu_pressed"]
