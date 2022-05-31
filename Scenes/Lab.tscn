@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://Resources/Menu.theme" type="Theme" id=1]
-[ext_resource path="res://Scenes/Lab.gd" type="Script" id=2]
+[ext_resource path="res://Sources/Lab.gd" type="Script" id=2]
+[ext_resource path="res://Resources/SmallFont.tres" type="DynamicFont" id=3]
 
 [node name="Lab" type="Node2D"]
 script = ExtResource( 2 )
@@ -13,6 +14,7 @@ rect_pivot_offset = Vector2( -136, 24 )
 color = Color( 0.227451, 0.25098, 0.278431, 1 )
 
 [node name="Menu" type="Button" parent="."]
+visible = false
 margin_left = 48.0
 margin_top = 50.0
 margin_right = 498.0
@@ -20,12 +22,104 @@ margin_bottom = 142.0
 theme = ExtResource( 1 )
 text = "MENU"
 
-[node name="PlayerShift" type="Label" parent="."]
+[node name="GotoControl" type="Button" parent="."]
+margin_left = 1046.0
+margin_top = 884.0
+margin_right = 1496.0
+margin_bottom = 976.0
+theme = ExtResource( 1 )
+text = "DAY ACTIONS"
+
+[node name="EndDay" type="Button" parent="."]
+margin_left = 498.0
+margin_top = 884.0
+margin_right = 948.0
+margin_bottom = 976.0
+theme = ExtResource( 1 )
+disabled = true
+text = "END DAY"
+
+[node name="Player" type="Label" parent="."]
 margin_left = 48.0
 margin_top = 210.0
 margin_right = 88.0
 margin_bottom = 302.0
 theme = ExtResource( 1 )
-text = "DAY SHIFT"
+text = "YOU"
+
+[node name="PlayerShift" type="Label" parent="."]
+margin_left = 48.0
+margin_top = 342.0
+margin_right = 404.0
+margin_bottom = 474.0
+theme = ExtResource( 1 )
+custom_fonts/font = ExtResource( 3 )
+text = "Player SHIFT"
+
+[node name="Opponent" type="Label" parent="."]
+margin_left = 698.0
+margin_top = 142.0
+margin_right = 973.0
+margin_bottom = 274.0
+theme = ExtResource( 1 )
+text = "Opponent"
+
+[node name="OpponentShift" type="Label" parent="."]
+margin_left = 1046.0
+margin_top = 167.0
+margin_right = 1470.0
+margin_bottom = 299.0
+theme = ExtResource( 1 )
+custom_fonts/font = ExtResource( 3 )
+text = "Opponent SHIFT"
+
+[node name="DiscardPileLabel" type="Label" parent="."]
+margin_left = 698.0
+margin_top = 274.0
+margin_right = 1046.0
+margin_bottom = 406.0
+theme = ExtResource( 1 )
+custom_fonts/font = ExtResource( 3 )
+text = "Discard pile"
+
+[node name="PopulationLabel" type="Label" parent="."]
+margin_left = 698.0
+margin_top = 540.0
+margin_right = 1046.0
+margin_bottom = 672.0
+theme = ExtResource( 1 )
+text = "Population"
+
+[node name="Population" type="Label" parent="."]
+margin_left = 1046.0
+margin_top = 540.0
+margin_right = 1394.0
+margin_bottom = 672.0
+theme = ExtResource( 1 )
+text = "0"
+
+[node name="DayLabel" type="Label" parent="."]
+margin_left = 698.0
+margin_top = 672.0
+margin_right = 1046.0
+margin_bottom = 804.0
+theme = ExtResource( 1 )
+text = "Day"
+
+[node name="Day" type="Label" parent="."]
+margin_left = 1046.0
+margin_top = 672.0
+margin_right = 1394.0
+margin_bottom = 804.0
+theme = ExtResource( 1 )
+text = "0"
+
+[node name="DiscardPile" type="HBoxContainer" parent="."]
+margin_left = 1046.0
+margin_top = 274.0
+margin_right = 1658.0
+margin_bottom = 540.0
 
 [connection signal="pressed" from="Menu" to="." method="on_menu_pressed"]
+[connection signal="pressed" from="GotoControl" to="." method="on_goto_control_pressed"]
+[connection signal="pressed" from="EndDay" to="." method="on_end_day_pressed"]

@@ -1,16 +1,14 @@
 extends Node2D
 
 signal menu_pressed
-
-var player_shift: String
+signal apply_pressed
 
 func _ready():
 	pass
 
-func set_shift(shift):
-	player_shift = shift
-	$PlayerShift.text = shift + " shift"
 
+func on_apply_pressed():
+	emit_signal("apply_pressed")
 
 func on_menu_pressed():
 	emit_signal("menu_pressed")
