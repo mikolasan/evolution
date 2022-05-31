@@ -31,6 +31,7 @@ theme = ExtResource( 1 )
 text = "DAY ACTIONS"
 
 [node name="EndDay" type="Button" parent="."]
+visible = false
 margin_left = 498.0
 margin_top = 884.0
 margin_right = 948.0

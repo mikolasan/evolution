@@ -365,5 +365,24 @@ var night_shift = [
 
 ]
 
+var rng = RandomNumberGenerator.new()
+
 func _ready():
-	pass
+	rng.randomize()
+
+func get_new_deck(shift):
+	var deck = day_shift if shift == "day" else night_shift
+	return deck.duplicate(true)
+
+func draw_cards(n, deck):
+	if deck.size() < n:
+		push_error("the deck is small")
+	
+	var hand = []
+	for i in range(n):
+		var k = rng.randi_range(0, deck.size() - 1)
+		var card = deck.pop_at(k)
+		hand.append(card)
+	return hand
+	
+

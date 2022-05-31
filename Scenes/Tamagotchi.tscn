@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Resources/Menu.theme" type="Theme" id=1]
 [ext_resource path="res://Resources/SmallFont.tres" type="DynamicFont" id=2]
 [ext_resource path="res://Resources/HintFont.tres" type="DynamicFont" id=3]
 [ext_resource path="res://Sources/Tamagotchi.gd" type="Script" id=4]
+[ext_resource path="res://Scenes/Card.tscn" type="PackedScene" id=5]
 
 [node name="Control" type="Node2D"]
 script = ExtResource( 4 )
@@ -22,6 +23,14 @@ margin_bottom = 174.0
 theme = ExtResource( 1 )
 text = "Population"
 
+[node name="Status" type="Label" parent="."]
+margin_left = 68.0
+margin_top = 461.0
+margin_right = 1540.0
+margin_bottom = 593.0
+theme = ExtResource( 1 )
+text = "Status..."
+
 [node name="Population" type="Label" parent="."]
 margin_left = 994.0
 margin_top = 42.0
@@ -31,48 +40,48 @@ theme = ExtResource( 1 )
 text = "0"
 
 [node name="DayLabel" type="Label" parent="."]
-margin_left = 1433.0
+margin_left = 1288.0
 margin_top = 42.0
-margin_right = 1564.0
+margin_right = 1419.0
 margin_bottom = 174.0
 theme = ExtResource( 1 )
 text = "Day"
 
 [node name="Day" type="Label" parent="."]
-margin_left = 1450.0
-margin_top = 157.0
-margin_right = 1549.0
-margin_bottom = 289.0
+margin_left = 1482.0
+margin_top = 42.0
+margin_right = 1581.0
+margin_bottom = 174.0
 theme = ExtResource( 1 )
 text = "0"
 align = 1
 
 [node name="PopulationLabel1" type="Label" parent="."]
-margin_left = 760.0
-margin_top = 254.0
-margin_right = 962.0
-margin_bottom = 313.0
+margin_left = 685.0
+margin_top = 244.0
+margin_right = 950.0
+margin_bottom = 303.0
 theme = ExtResource( 1 )
-custom_fonts/font = ExtResource( 2 )
-text = "Population"
+custom_fonts/font = ExtResource( 3 )
+text = "Population for next day"
 
 [node name="PopulationLabel2" type="Label" parent="."]
-margin_left = 760.0
-margin_top = 355.0
-margin_right = 962.0
-margin_bottom = 414.0
+margin_left = 685.0
+margin_top = 333.0
+margin_right = 950.0
+margin_bottom = 392.0
 theme = ExtResource( 1 )
-custom_fonts/font = ExtResource( 2 )
-text = "Population"
+custom_fonts/font = ExtResource( 3 )
+text = "Population for next day"
 
 [node name="PopulationLabel3" type="Label" parent="."]
-margin_left = 760.0
-margin_top = 460.0
-margin_right = 962.0
-margin_bottom = 519.0
+margin_left = 685.0
+margin_top = 422.0
+margin_right = 950.0
+margin_bottom = 481.0
 theme = ExtResource( 1 )
-custom_fonts/font = ExtResource( 2 )
-text = "Population"
+custom_fonts/font = ExtResource( 3 )
+text = "Population for next day"
 
 [node name="GridContainer" type="GridContainer" parent="."]
 margin_left = 88.0
@@ -80,11 +89,14 @@ margin_top = 204.0
 margin_right = 1052.0
 margin_bottom = 968.0
 columns = 2
+__meta__ = {
+"_edit_lock_": true
+}
 
 [node name="HungerLabel" type="Label" parent="GridContainer"]
-margin_top = 19.0
+margin_top = 17.0
 margin_right = 300.0
-margin_bottom = 78.0
+margin_bottom = 64.0
 rect_min_size = Vector2( 300, 0 )
 theme = ExtResource( 1 )
 custom_fonts/font = ExtResource( 2 )
@@ -92,76 +104,77 @@ text = "hunger"
 
 [node name="HungerContainer" type="VBoxContainer" parent="GridContainer"]
 margin_left = 304.0
-margin_right = 634.0
-margin_bottom = 97.0
+margin_right = 589.0
+margin_bottom = 81.0
 custom_constants/separation = 0
 
 [node name="Scale" type="HBoxContainer" parent="GridContainer/HungerContainer"]
-margin_right = 330.0
-margin_bottom = 50.0
+margin_right = 285.0
+margin_bottom = 40.0
 custom_constants/separation = 20
 
 [node name="1" type="ColorRect" parent="GridContainer/HungerContainer/Scale"]
-margin_right = 50.0
-margin_bottom = 50.0
-rect_min_size = Vector2( 50, 50 )
+margin_right = 40.0
+margin_bottom = 40.0
+rect_min_size = Vector2( 40, 40 )
 size_flags_vertical = 4
 color = Color( 0.819608, 0, 0, 1 )
 
 [node name="2" type="ColorRect" parent="GridContainer/HungerContainer/Scale"]
-margin_left = 70.0
-margin_right = 120.0
-margin_bottom = 50.0
-rect_min_size = Vector2( 50, 50 )
+margin_left = 60.0
+margin_right = 100.0
+margin_bottom = 40.0
+rect_min_size = Vector2( 40, 40 )
 size_flags_vertical = 4
 color = Color( 0.819608, 0.25098, 0, 1 )
 
 [node name="3" type="ColorRect" parent="GridContainer/HungerContainer/Scale"]
-margin_left = 140.0
-margin_right = 190.0
-margin_bottom = 50.0
-rect_min_size = Vector2( 50, 50 )
+margin_left = 120.0
+margin_right = 160.0
+margin_bottom = 40.0
+rect_min_size = Vector2( 40, 40 )
 size_flags_vertical = 4
 color = Color( 0.819608, 0.654902, 0, 1 )
 
 [node name="4" type="ColorRect" parent="GridContainer/HungerContainer/Scale"]
-margin_left = 210.0
-margin_right = 260.0
-margin_bottom = 50.0
-rect_min_size = Vector2( 50, 50 )
+margin_left = 180.0
+margin_right = 220.0
+margin_bottom = 40.0
+rect_min_size = Vector2( 40, 40 )
 size_flags_vertical = 4
 color = Color( 0.639216, 0.819608, 0, 1 )
 
 [node name="5" type="ColorRect" parent="GridContainer/HungerContainer/Scale"]
-margin_left = 280.0
-margin_right = 330.0
-margin_bottom = 50.0
-rect_min_size = Vector2( 50, 50 )
+margin_left = 240.0
+margin_right = 280.0
+margin_bottom = 40.0
+rect_min_size = Vector2( 40, 40 )
 size_flags_vertical = 4
-color = Color( 0.2, 0.819608, 0, 1 )
+color = Color( 0.227451, 0.227451, 0.227451, 1 )
 
 [node name="AffectPopulation" type="HBoxContainer" parent="GridContainer/HungerContainer"]
-margin_top = 50.0
-margin_right = 330.0
-margin_bottom = 97.0
+margin_top = 40.0
+margin_right = 285.0
+margin_bottom = 81.0
 custom_constants/separation = 20
 
 [node name="1" type="Label" parent="GridContainer/HungerContainer/AffectPopulation"]
-margin_right = 50.0
-margin_bottom = 47.0
-rect_min_size = Vector2( 50, 0 )
+margin_right = 41.0
+margin_bottom = 41.0
+rect_min_size = Vector2( 40, 0 )
 size_flags_horizontal = 4
 theme = ExtResource( 1 )
+custom_colors/font_color = Color( 0.509804, 0.509804, 0.509804, 1 )
 custom_fonts/font = ExtResource( 3 )
 text = "-20"
 align = 1
 clip_text = true
 
 [node name="2" type="Label" parent="GridContainer/HungerContainer/AffectPopulation"]
-margin_left = 70.0
-margin_right = 120.0
-margin_bottom = 47.0
-rect_min_size = Vector2( 50, 0 )
+margin_left = 61.0
+margin_right = 102.0
+margin_bottom = 41.0
+rect_min_size = Vector2( 40, 0 )
 size_flags_horizontal = 4
 theme = ExtResource( 1 )
 custom_fonts/font = ExtResource( 3 )
@@ -170,10 +183,10 @@ align = 1
 clip_text = true
 
 [node name="3" type="Label" parent="GridContainer/HungerContainer/AffectPopulation"]
-margin_left = 140.0
-margin_right = 190.0
-margin_bottom = 47.0
-rect_min_size = Vector2( 50, 0 )
+margin_left = 122.0
+margin_right = 163.0
+margin_bottom = 41.0
+rect_min_size = Vector2( 40, 0 )
 size_flags_horizontal = 4
 theme = ExtResource( 1 )
 custom_fonts/font = ExtResource( 3 )
@@ -182,10 +195,10 @@ align = 1
 clip_text = true
 
 [node name="4" type="Label" parent="GridContainer/HungerContainer/AffectPopulation"]
-margin_left = 210.0
-margin_right = 260.0
-margin_bottom = 47.0
-rect_min_size = Vector2( 50, 0 )
+margin_left = 183.0
+margin_right = 224.0
+margin_bottom = 41.0
+rect_min_size = Vector2( 40, 0 )
 size_flags_horizontal = 4
 theme = ExtResource( 1 )
 custom_fonts/font = ExtResource( 3 )
@@ -194,10 +207,10 @@ align = 1
 clip_text = true
 
 [node name="5" type="Label" parent="GridContainer/HungerContainer/AffectPopulation"]
-margin_left = 280.0
-margin_right = 330.0
-margin_bottom = 47.0
-rect_min_size = Vector2( 50, 0 )
+margin_left = 244.0
+margin_right = 285.0
+margin_bottom = 41.0
+rect_min_size = Vector2( 40, 0 )
 size_flags_horizontal = 4
 theme = ExtResource( 1 )
 custom_fonts/font = ExtResource( 3 )
@@ -206,9 +219,9 @@ align = 1
 clip_text = true
 
 [node name="HappinessLabel" type="Label" parent="GridContainer"]
-margin_top = 122.0
+margin_top = 104.0
 margin_right = 300.0
-margin_bottom = 181.0
+margin_bottom = 151.0
 rect_min_size = Vector2( 300, 0 )
 theme = ExtResource( 1 )
 custom_fonts/font = ExtResource( 2 )
@@ -216,64 +229,64 @@ text = "Happiness"
 
 [node name="HappinessContainer" type="VBoxContainer" parent="GridContainer"]
 margin_left = 304.0
-margin_top = 101.0
-margin_right = 634.0
-margin_bottom = 202.0
+margin_top = 85.0
+margin_right = 589.0
+margin_bottom = 170.0
 
 [node name="Scale" type="HBoxContainer" parent="GridContainer/HappinessContainer"]
-margin_right = 330.0
-margin_bottom = 50.0
+margin_right = 285.0
+margin_bottom = 40.0
 custom_constants/separation = 20
 
 [node name="1" type="ColorRect" parent="GridContainer/HappinessContainer/Scale"]
-margin_right = 50.0
-margin_bottom = 50.0
-rect_min_size = Vector2( 50, 50 )
+margin_right = 40.0
+margin_bottom = 40.0
+rect_min_size = Vector2( 40, 40 )
 size_flags_vertical = 4
 color = Color( 0.819608, 0, 0, 1 )
 
 [node name="2" type="ColorRect" parent="GridContainer/HappinessContainer/Scale"]
-margin_left = 70.0
-margin_right = 120.0
-margin_bottom = 50.0
-rect_min_size = Vector2( 50, 50 )
+margin_left = 60.0
+margin_right = 100.0
+margin_bottom = 40.0
+rect_min_size = Vector2( 40, 40 )
 size_flags_vertical = 4
 color = Color( 0.819608, 0.25098, 0, 1 )
 
 [node name="3" type="ColorRect" parent="GridContainer/HappinessContainer/Scale"]
-margin_left = 140.0
-margin_right = 190.0
-margin_bottom = 50.0
-rect_min_size = Vector2( 50, 50 )
+margin_left = 120.0
+margin_right = 160.0
+margin_bottom = 40.0
+rect_min_size = Vector2( 40, 40 )
 size_flags_vertical = 4
 color = Color( 0.819608, 0.654902, 0, 1 )
 
 [node name="4" type="ColorRect" parent="GridContainer/HappinessContainer/Scale"]
-margin_left = 210.0
-margin_right = 260.0
-margin_bottom = 50.0
-rect_min_size = Vector2( 50, 50 )
+margin_left = 180.0
+margin_right = 220.0
+margin_bottom = 40.0
+rect_min_size = Vector2( 40, 40 )
 size_flags_vertical = 4
 color = Color( 0.639216, 0.819608, 0, 1 )
 
 [node name="5" type="ColorRect" parent="GridContainer/HappinessContainer/Scale"]
-margin_left = 280.0
-margin_right = 330.0
-margin_bottom = 50.0
-rect_min_size = Vector2( 50, 50 )
+margin_left = 240.0
+margin_right = 280.0
+margin_bottom = 40.0
+rect_min_size = Vector2( 40, 40 )
 size_flags_vertical = 4
 color = Color( 0.2, 0.819608, 0, 1 )
 
 [node name="AffectPopulation" type="HBoxContainer" parent="GridContainer/HappinessContainer"]
-margin_top = 54.0
-margin_right = 330.0
-margin_bottom = 101.0
+margin_top = 44.0
+margin_right = 285.0
+margin_bottom = 85.0
 custom_constants/separation = 20
 
 [node name="1" type="Label" parent="GridContainer/HappinessContainer/AffectPopulation"]
-margin_right = 50.0
-margin_bottom = 47.0
-rect_min_size = Vector2( 50, 0 )
+margin_right = 41.0
+margin_bottom = 41.0
+rect_min_size = Vector2( 40, 0 )
 size_flags_horizontal = 4
 theme = ExtResource( 1 )
 custom_fonts/font = ExtResource( 3 )
@@ -282,10 +295,10 @@ align = 1
 clip_text = true
 
 [node name="2" type="Label" parent="GridContainer/HappinessContainer/AffectPopulation"]
-margin_left = 70.0
-margin_right = 120.0
-margin_bottom = 47.0
-rect_min_size = Vector2( 50, 0 )
+margin_left = 61.0
+margin_right = 102.0
+margin_bottom = 41.0
+rect_min_size = Vector2( 40, 0 )
 size_flags_horizontal = 4
 theme = ExtResource( 1 )
 custom_fonts/font = ExtResource( 3 )
@@ -294,10 +307,10 @@ align = 1
 clip_text = true
 
 [node name="3" type="Label" parent="GridContainer/HappinessContainer/AffectPopulation"]
-margin_left = 140.0
-margin_right = 190.0
-margin_bottom = 47.0
-rect_min_size = Vector2( 50, 0 )
+margin_left = 122.0
+margin_right = 163.0
+margin_bottom = 41.0
+rect_min_size = Vector2( 40, 0 )
 size_flags_horizontal = 4
 theme = ExtResource( 1 )
 custom_fonts/font = ExtResource( 3 )
@@ -306,10 +319,10 @@ align = 1
 clip_text = true
 
 [node name="4" type="Label" parent="GridContainer/HappinessContainer/AffectPopulation"]
-margin_left = 210.0
-margin_right = 260.0
-margin_bottom = 47.0
-rect_min_size = Vector2( 50, 0 )
+margin_left = 183.0
+margin_right = 224.0
+margin_bottom = 41.0
+rect_min_size = Vector2( 40, 0 )
 size_flags_horizontal = 4
 theme = ExtResource( 1 )
 custom_fonts/font = ExtResource( 3 )
@@ -318,10 +331,10 @@ align = 1
 clip_text = true
 
 [node name="5" type="Label" parent="GridContainer/HappinessContainer/AffectPopulation"]
-margin_left = 280.0
-margin_right = 330.0
-margin_bottom = 47.0
-rect_min_size = Vector2( 50, 0 )
+margin_left = 244.0
+margin_right = 285.0
+margin_bottom = 41.0
+rect_min_size = Vector2( 40, 0 )
 size_flags_horizontal = 4
 theme = ExtResource( 1 )
 custom_fonts/font = ExtResource( 3 )
@@ -330,9 +343,9 @@ align = 1
 clip_text = true
 
 [node name="DisciplineLabel" type="Label" parent="GridContainer"]
-margin_top = 227.0
+margin_top = 193.0
 margin_right = 300.0
-margin_bottom = 286.0
+margin_bottom = 240.0
 rect_min_size = Vector2( 300, 0 )
 theme = ExtResource( 1 )
 custom_fonts/font = ExtResource( 2 )
@@ -340,64 +353,64 @@ text = "Discipline"
 
 [node name="DisciplineContainer" type="VBoxContainer" parent="GridContainer"]
 margin_left = 304.0
-margin_top = 206.0
-margin_right = 634.0
-margin_bottom = 307.0
+margin_top = 174.0
+margin_right = 589.0
+margin_bottom = 259.0
 
 [node name="Scale" type="HBoxContainer" parent="GridContainer/DisciplineContainer"]
-margin_right = 330.0
-margin_bottom = 50.0
+margin_right = 285.0
+margin_bottom = 40.0
 custom_constants/separation = 20
 
 [node name="1" type="ColorRect" parent="GridContainer/DisciplineContainer/Scale"]
-margin_right = 50.0
-margin_bottom = 50.0
-rect_min_size = Vector2( 50, 50 )
+margin_right = 40.0
+margin_bottom = 40.0
+rect_min_size = Vector2( 40, 40 )
 size_flags_vertical = 4
 color = Color( 0.819608, 0, 0, 1 )
 
 [node name="2" type="ColorRect" parent="GridContainer/DisciplineContainer/Scale"]
-margin_left = 70.0
-margin_right = 120.0
-margin_bottom = 50.0
-rect_min_size = Vector2( 50, 50 )
+margin_left = 60.0
+margin_right = 100.0
+margin_bottom = 40.0
+rect_min_size = Vector2( 40, 40 )
 size_flags_vertical = 4
 color = Color( 0.819608, 0.25098, 0, 1 )
 
 [node name="3" type="ColorRect" parent="GridContainer/DisciplineContainer/Scale"]
-margin_left = 140.0
-margin_right = 190.0
-margin_bottom = 50.0
-rect_min_size = Vector2( 50, 50 )
+margin_left = 120.0
+margin_right = 160.0
+margin_bottom = 40.0
+rect_min_size = Vector2( 40, 40 )
 size_flags_vertical = 4
 color = Color( 0.819608, 0.654902, 0, 1 )
 
 [node name="4" type="ColorRect" parent="GridContainer/DisciplineContainer/Scale"]
-margin_left = 210.0
-margin_right = 260.0
-margin_bottom = 50.0
-rect_min_size = Vector2( 50, 50 )
+margin_left = 180.0
+margin_right = 220.0
+margin_bottom = 40.0
+rect_min_size = Vector2( 40, 40 )
 size_flags_vertical = 4
 color = Color( 0.639216, 0.819608, 0, 1 )
 
 [node name="5" type="ColorRect" parent="GridContainer/DisciplineContainer/Scale"]
-margin_left = 280.0
-margin_right = 330.0
-margin_bottom = 50.0
-rect_min_size = Vector2( 50, 50 )
+margin_left = 240.0
+margin_right = 280.0
+margin_bottom = 40.0
+rect_min_size = Vector2( 40, 40 )
 size_flags_vertical = 4
 color = Color( 0.2, 0.819608, 0, 1 )
 
 [node name="AffectPopulation" type="HBoxContainer" parent="GridContainer/DisciplineContainer"]
-margin_top = 54.0
-margin_right = 330.0
-margin_bottom = 101.0
+margin_top = 44.0
+margin_right = 285.0
+margin_bottom = 85.0
 custom_constants/separation = 20
 
 [node name="1" type="Label" parent="GridContainer/DisciplineContainer/AffectPopulation"]
-margin_right = 50.0
-margin_bottom = 47.0
-rect_min_size = Vector2( 50, 0 )
+margin_right = 41.0
+margin_bottom = 41.0
+rect_min_size = Vector2( 40, 0 )
 size_flags_horizontal = 4
 theme = ExtResource( 1 )
 custom_fonts/font = ExtResource( 3 )
@@ -406,10 +419,10 @@ align = 1
 clip_text = true
 
 [node name="2" type="Label" parent="GridContainer/DisciplineContainer/AffectPopulation"]
-margin_left = 70.0
-margin_right = 120.0
-margin_bottom = 47.0
-rect_min_size = Vector2( 50, 0 )
+margin_left = 61.0
+margin_right = 102.0
+margin_bottom = 41.0
+rect_min_size = Vector2( 40, 0 )
 size_flags_horizontal = 4
 theme = ExtResource( 1 )
 custom_fonts/font = ExtResource( 3 )
@@ -418,10 +431,10 @@ align = 1
 clip_text = true
 
 [node name="3" type="Label" parent="GridContainer/DisciplineContainer/AffectPopulation"]
-margin_left = 140.0
-margin_right = 190.0
-margin_bottom = 47.0
-rect_min_size = Vector2( 50, 0 )
+margin_left = 122.0
+margin_right = 163.0
+margin_bottom = 41.0
+rect_min_size = Vector2( 40, 0 )
 size_flags_horizontal = 4
 theme = ExtResource( 1 )
 custom_fonts/font = ExtResource( 3 )
@@ -430,10 +443,10 @@ align = 1
 clip_text = true
 
 [node name="4" type="Label" parent="GridContainer/DisciplineContainer/AffectPopulation"]
-margin_left = 210.0
-margin_right = 260.0
-margin_bottom = 47.0
-rect_min_size = Vector2( 50, 0 )
+margin_left = 183.0
+margin_right = 224.0
+margin_bottom = 41.0
+rect_min_size = Vector2( 40, 0 )
 size_flags_horizontal = 4
 theme = ExtResource( 1 )
 custom_fonts/font = ExtResource( 3 )
@@ -442,10 +455,10 @@ align = 1
 clip_text = true
 
 [node name="5" type="Label" parent="GridContainer/DisciplineContainer/AffectPopulation"]
-margin_left = 280.0
-margin_right = 330.0
-margin_bottom = 47.0
-rect_min_size = Vector2( 50, 0 )
+margin_left = 244.0
+margin_right = 285.0
+margin_bottom = 41.0
+rect_min_size = Vector2( 40, 0 )
 size_flags_horizontal = 4
 theme = ExtResource( 1 )
 custom_fonts/font = ExtResource( 3 )
@@ -454,62 +467,62 @@ align = 1
 clip_text = true
 
 [node name="TrainingLabel" type="Label" parent="."]
-margin_left = 88.0
-margin_top = 565.0
-margin_right = 382.0
-margin_bottom = 697.0
+margin_left = 1052.0
+margin_top = 204.0
+margin_right = 1346.0
+margin_bottom = 336.0
 theme = ExtResource( 1 )
 custom_fonts/font = ExtResource( 2 )
 text = "Training"
 
 [node name="Scale" type="HBoxContainer" parent="TrainingLabel"]
-margin_left = 304.0
-margin_top = -42.0
-margin_right = 672.0
-margin_bottom = 94.0
+margin_left = 196.0
+margin_top = -45.0
+margin_right = 564.0
+margin_bottom = 91.0
 custom_constants/separation = 20
 
 [node name="1" type="ColorRect" parent="TrainingLabel/Scale"]
-margin_top = 43.0
-margin_right = 50.0
-margin_bottom = 93.0
-rect_min_size = Vector2( 50, 50 )
+margin_top = 48.0
+margin_right = 40.0
+margin_bottom = 88.0
+rect_min_size = Vector2( 40, 40 )
 size_flags_vertical = 4
 color = Color( 0.819608, 0, 0, 1 )
 
 [node name="2" type="ColorRect" parent="TrainingLabel/Scale"]
-margin_left = 70.0
-margin_top = 43.0
-margin_right = 120.0
-margin_bottom = 93.0
-rect_min_size = Vector2( 50, 50 )
+margin_left = 60.0
+margin_top = 48.0
+margin_right = 100.0
+margin_bottom = 88.0
+rect_min_size = Vector2( 40, 40 )
 size_flags_vertical = 4
 color = Color( 0.819608, 0.25098, 0, 1 )
 
 [node name="3" type="ColorRect" parent="TrainingLabel/Scale"]
-margin_left = 140.0
-margin_top = 43.0
-margin_right = 190.0
-margin_bottom = 93.0
-rect_min_size = Vector2( 50, 50 )
+margin_left = 120.0
+margin_top = 48.0
+margin_right = 160.0
+margin_bottom = 88.0
+rect_min_size = Vector2( 40, 40 )
 size_flags_vertical = 4
 color = Color( 0.819608, 0.654902, 0, 1 )
 
 [node name="4" type="ColorRect" parent="TrainingLabel/Scale"]
-margin_left = 210.0
-margin_top = 43.0
-margin_right = 260.0
-margin_bottom = 93.0
-rect_min_size = Vector2( 50, 50 )
+margin_left = 180.0
+margin_top = 48.0
+margin_right = 220.0
+margin_bottom = 88.0
+rect_min_size = Vector2( 40, 40 )
 size_flags_vertical = 4
 color = Color( 0.639216, 0.819608, 0, 1 )
 
 [node name="5" type="ColorRect" parent="TrainingLabel/Scale"]
-margin_left = 280.0
-margin_top = 43.0
-margin_right = 330.0
-margin_bottom = 93.0
-rect_min_size = Vector2( 50, 50 )
+margin_left = 240.0
+margin_top = 48.0
+margin_right = 280.0
+margin_bottom = 88.0
+rect_min_size = Vector2( 40, 40 )
 size_flags_vertical = 4
 color = Color( 0.2, 0.819608, 0, 1 )
 
@@ -523,27 +536,51 @@ theme = ExtResource( 1 )
 text = "MENU"
 
 [node name="Apply" type="Button" parent="."]
-margin_left = 1174.0
-margin_top = 847.0
-margin_right = 1624.0
-margin_bottom = 939.0
+margin_left = 48.0
+margin_top = 50.0
+margin_right = 498.0
+margin_bottom = 142.0
 theme = ExtResource( 1 )
 text = "APPLY"
 
 [node name="NightBackground" type="ColorRect" parent="."]
-margin_left = 1381.0
-margin_top = 324.0
-margin_right = 1613.0
-margin_bottom = 754.0
+margin_left = 1052.0
+margin_top = 285.0
+margin_right = 1396.0
+margin_bottom = 530.0
 rect_pivot_offset = Vector2( -136, 24 )
 color = Color( 0.27451, 0.592157, 0.623529, 1 )
 
 [node name="Hand" type="HBoxContainer" parent="."]
-margin_left = 88.0
-margin_top = 674.0
-margin_right = 1108.0
-margin_bottom = 1008.0
+margin_left = 72.0
+margin_top = 584.0
+margin_right = 2152.0
+margin_bottom = 1184.0
+rect_scale = Vector2( 0.7, 0.7 )
 custom_constants/separation = 20
+
+[node name="Card1" parent="Hand" instance=ExtResource( 5 )]
+rect_min_size = Vector2( 400, 600 )
+
+[node name="Card2" parent="Hand" instance=ExtResource( 5 )]
+margin_left = 420.0
+margin_right = 820.0
+rect_min_size = Vector2( 400, 600 )
+
+[node name="Card3" parent="Hand" instance=ExtResource( 5 )]
+margin_left = 840.0
+margin_right = 1240.0
+rect_min_size = Vector2( 400, 600 )
+
+[node name="Card4" parent="Hand" instance=ExtResource( 5 )]
+margin_left = 1260.0
+margin_right = 1660.0
+rect_min_size = Vector2( 400, 600 )
+
+[node name="Card5" parent="Hand" instance=ExtResource( 5 )]
+margin_left = 1680.0
+margin_right = 2080.0
+rect_min_size = Vector2( 400, 600 )
 
 [connection signal="pressed" from="Menu" to="." method="on_menu_pressed"]
 [connection signal="pressed" from="Apply" to="." method="on_apply_pressed"]

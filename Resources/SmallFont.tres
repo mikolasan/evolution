@@ -3,7 +3,7 @@
 [ext_resource path="res://Assets/Fonts/Bebas-Regular.ttf" type="DynamicFontData" id=1]
 
 [resource]
-size = 40
+size = 30
 extra_spacing_top = -18
 extra_spacing_bottom = -11
 font_data = ExtResource( 1 )
