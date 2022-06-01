@@ -30,7 +30,7 @@ func _ready():
 
 func on_apply_pressed():
 	for discard_id in marked_to_discard:
-		data.hand.erase(discard_id)
+		data.hand.remove(discard_id)
 	marked_to_discard = []
 	
 	data.selected_card.effect.call_func(data.values, data.traits)

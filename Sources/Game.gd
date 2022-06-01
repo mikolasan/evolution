@@ -12,8 +12,10 @@ func _ready():
 	show_menu()
 
 func on_shift_selected(shift):
+	get_tree().call_group_flags(SceneTree.GROUP_CALL_REALTIME, "LabShow", "hide")
 	$Lab.set_shift(shift)
-	show_lab(null)
+	$Lab.update_scene()
+	$Lab.show()
 
 func show_menu():
 	get_tree().call_group_flags(SceneTree.GROUP_CALL_REALTIME, "MainMenuShow", "hide")
@@ -25,7 +27,7 @@ func show_start_menu():
 
 func show_lab(control_data):
 	get_tree().call_group_flags(SceneTree.GROUP_CALL_REALTIME, "LabShow", "hide")
-	$Lab.update_scene(control_data)
+	$Lab.next_day(control_data)
 	$Lab.show()
 
 func show_control(day, control_data):

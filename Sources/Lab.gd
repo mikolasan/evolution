@@ -64,12 +64,16 @@ func reset_game():
 	night_deck = Cards.get_new_deck("night")
 
 func update_labels():
-	$Population.text = str(values.population)
+	$Population.text = str(control_data.values.population)
 	$Day.text = str(day)
 
-func update_scene(data):
-	if data:
-		control_data = data
+func next_day(data):
+	control_data = data
+	day = day + 1
+	
+	update_scene()
+
+func update_scene():
 	update_labels()
 
 func set_shift(shift):
