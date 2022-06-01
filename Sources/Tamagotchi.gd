@@ -33,7 +33,8 @@ func on_apply_pressed():
 		data.hand.remove(discard_id)
 	marked_to_discard = []
 	
-	data.selected_card.effect.call_func(data.values, data.traits)
+	if data.selected_card.effect:
+		data.selected_card.effect.call_func(data.values, data.traits)
 	if data.selected_card.constant:
 		data.constant_cards.append(data.selected_card)
 	data.hand.erase(data.selected_card)
@@ -64,6 +65,7 @@ func update_scene(day, control_data):
 			card_object.hide()
 		var card = hand[i]
 		card_object.set_card(i, card)
+		card_object.reveal()
 	
 	data.selected_card = null
 	marked_to_discard = []

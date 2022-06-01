@@ -551,36 +551,59 @@ margin_bottom = 530.0
 rect_pivot_offset = Vector2( -136, 24 )
 color = Color( 0.27451, 0.592157, 0.623529, 1 )
 
-[node name="Hand" type="HBoxContainer" parent="."]
-margin_left = 72.0
-margin_top = 584.0
-margin_right = 2152.0
-margin_bottom = 1184.0
-rect_scale = Vector2( 0.7, 0.7 )
-custom_constants/separation = 20
+[node name="Hand" type="Control" parent="."]
+margin_right = 40.0
+margin_bottom = 40.0
 
 [node name="Card1" parent="Hand" instance=ExtResource( 5 )]
+margin_left = 72.0
+margin_top = 584.0
+margin_right = 472.0
+margin_bottom = 1184.0
 rect_min_size = Vector2( 400, 600 )
+rect_scale = Vector2( 0.7, 0.7 )
+
+[node name="Tween" type="Tween" parent="Hand/Card1"]
 
 [node name="Card2" parent="Hand" instance=ExtResource( 5 )]
-margin_left = 420.0
-margin_right = 820.0
+margin_left = 366.0
+margin_top = 584.0
+margin_right = 766.0
+margin_bottom = 1184.0
 rect_min_size = Vector2( 400, 600 )
+rect_scale = Vector2( 0.7, 0.7 )
+
+[node name="Tween" type="Tween" parent="Hand/Card2"]
 
 [node name="Card3" parent="Hand" instance=ExtResource( 5 )]
-margin_left = 840.0
-margin_right = 1240.0
+margin_left = 660.0
+margin_top = 584.0
+margin_right = 1060.0
+margin_bottom = 1184.0
 rect_min_size = Vector2( 400, 600 )
+rect_scale = Vector2( 0.7, 0.7 )
+
+[node name="Tween" type="Tween" parent="Hand/Card3"]
 
 [node name="Card4" parent="Hand" instance=ExtResource( 5 )]
-margin_left = 1260.0
-margin_right = 1660.0
+margin_left = 954.0
+margin_top = 584.0
+margin_right = 1354.0
+margin_bottom = 1184.0
 rect_min_size = Vector2( 400, 600 )
+rect_scale = Vector2( 0.7, 0.7 )
+
+[node name="Tween" type="Tween" parent="Hand/Card4"]
 
 [node name="Card5" parent="Hand" instance=ExtResource( 5 )]
-margin_left = 1680.0
-margin_right = 2080.0
+margin_left = 1248.0
+margin_top = 584.0
+margin_right = 1648.0
+margin_bottom = 1184.0
 rect_min_size = Vector2( 400, 600 )
+rect_scale = Vector2( 0.7, 0.7 )
+
+[node name="Tween" type="Tween" parent="Hand/Card5"]
 
 [connection signal="pressed" from="Menu" to="." method="on_menu_pressed"]
 [connection signal="pressed" from="Apply" to="." method="on_apply_pressed"]

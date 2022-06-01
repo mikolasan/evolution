@@ -9,7 +9,10 @@ func _ready():
 	$Control.connect("apply_pressed", self, "show_lab")
 	$Control.connect("menu_pressed", self, "show_menu")
 	
-	show_menu()
+#	$StateMachinePlayer.set_trigger("ready")
+	get_tree().call_group_flags(SceneTree.GROUP_CALL_REALTIME, "Ready", "hide")
+	$AnimationPlayer.play("Splash")
+	
 
 func on_shift_selected(shift):
 	get_tree().call_group_flags(SceneTree.GROUP_CALL_REALTIME, "LabShow", "hide")
@@ -17,11 +20,14 @@ func on_shift_selected(shift):
 	$Lab.update_scene()
 	$Lab.show()
 
-func show_menu():
+func show_main_menu():
 	get_tree().call_group_flags(SceneTree.GROUP_CALL_REALTIME, "MainMenuShow", "hide")
 	$Main.show()
 	
 func show_start_menu():
+	$AnimationPlayer.play("Start")
+	
+func _show_start_menu():
 	get_tree().call_group_flags(SceneTree.GROUP_CALL_REALTIME, "StartMenuShow", "hide")
 	$Start.show()
 
@@ -37,3 +43,18 @@ func show_control(day, control_data):
 	
 func next_turn():
 	pass
+
+func on_state_machine_updated(state, delta):
+	match state:
+		"Splash":
+			$AnimationPlayer.play("Logo")
+		"Main":
+			$AnimationPlayer.play("Show Main")
+			show_main_menu()
+
+func on_player_animation_finished(anim_name):
+	match anim_name:
+		"Logo":
+			pass
+		"Show Main":
+			pass

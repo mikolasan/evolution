@@ -3,6 +3,7 @@ extends Control
 signal card_selected
 
 var card_id: int
+onready var table_position = get_rect().position
 
 func _ready():
 	pass
@@ -61,3 +62,17 @@ func set_state(state):
 func on_card_gui_input(event):
 	if event is InputEventMouseButton and event.pressed:
 		emit_signal("card_selected")
+
+func reveal():
+	var tween = get_node("Tween")
+	tween.interpolate_property(self,
+		"rect_position",
+		Vector2(2000, table_position.y),
+		table_position,
+		1,
+		Tween.TRANS_ELASTIC,
+		Tween.EASE_IN_OUT
+	)
+	tween.start()
+
+
