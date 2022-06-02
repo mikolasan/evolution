@@ -545,12 +545,12 @@ theme = ExtResource( 1 )
 text = "MENU"
 
 [node name="Apply" type="Button" parent="."]
-margin_left = 1368.0
+margin_left = 1335.0
 margin_top = 940.0
 margin_right = 1613.0
 margin_bottom = 1049.0
 theme = ExtResource( 1 )
-text = "APPLY"
+text = "End Shift"
 
 [node name="NightBackground" type="ColorRect" parent="."]
 visible = false
@@ -570,45 +570,45 @@ margin_bottom = -56.0
 [node name="Card1" parent="Hand" instance=ExtResource( 5 )]
 margin_left = 72.0
 margin_top = 584.0
-margin_right = 472.0
-margin_bottom = 1184.0
-rect_min_size = Vector2( 400, 600 )
+margin_right = 72.0
+margin_bottom = 584.0
+rect_min_size = Vector2( 280, 420 )
 
 [node name="Tween" type="Tween" parent="Hand/Card1"]
 
 [node name="Card2" parent="Hand" instance=ExtResource( 5 )]
 margin_left = 366.0
 margin_top = 584.0
-margin_right = 766.0
-margin_bottom = 1184.0
-rect_min_size = Vector2( 400, 600 )
+margin_right = 646.0
+margin_bottom = 1004.0
+rect_min_size = Vector2( 280, 420 )
 
 [node name="Tween" type="Tween" parent="Hand/Card2"]
 
 [node name="Card3" parent="Hand" instance=ExtResource( 5 )]
 margin_left = 660.0
 margin_top = 584.0
-margin_right = 1060.0
-margin_bottom = 1184.0
-rect_min_size = Vector2( 400, 600 )
+margin_right = 940.0
+margin_bottom = 1004.0
+rect_min_size = Vector2( 280, 420 )
 
 [node name="Tween" type="Tween" parent="Hand/Card3"]
 
 [node name="Card4" parent="Hand" instance=ExtResource( 5 )]
 margin_left = 954.0
 margin_top = 584.0
-margin_right = 1354.0
-margin_bottom = 1184.0
-rect_min_size = Vector2( 400, 600 )
+margin_right = 1234.0
+margin_bottom = 1004.0
+rect_min_size = Vector2( 280, 420 )
 
 [node name="Tween" type="Tween" parent="Hand/Card4"]
 
 [node name="Card5" parent="Hand" instance=ExtResource( 5 )]
 margin_left = 1248.0
 margin_top = 584.0
-margin_right = 1648.0
-margin_bottom = 1184.0
-rect_min_size = Vector2( 400, 600 )
+margin_right = 1528.0
+margin_bottom = 1004.0
+rect_min_size = Vector2( 280, 420 )
 
 [node name="Tween" type="Tween" parent="Hand/Card5"]
 

@@ -30,188 +30,178 @@ func camouflage_func(values, traits):
 var day_shift = [
 	{
 		"title":"Hermaphroditism",
-		"trait": "reproduction",
-		"type": " ",
+		"type": "Reproduction",
 		"description": "Population is not affected if Distress card targets only one gender",
-		"constant": true,
+		"one_time_effect": null,
+		"constant_effect": "hermaphroditism",
 	},
 
 	{
-		"title":"Androdioecy (Hermaphroditism)",
-		"trait": "reproduction",
-		"type": " ",
-		"description": "Population is not affected if Distress card targets only one gender. Instant effect: double the population",
-		"constant": true,
-		"effect": funcref(self, "double_population"),
+		"title":"Androdioecy",
+		"type": "Reproduction",
+		"description": "Version of hermaphroditism. Population is not affected if Distress card targets only one gender. Instant effect: double the population",
+		"one_time_effect": "population: x2",
+		"constant_effect": "hermaphroditism",
 	},
 
 	{
-		"title":"Gynodioecy (Hermaphroditism)",
-		"trait": "reproduction",
-		"type": " ",
-		"description": "Population is not affected if Distress card targets only one gender. Instant effect: double the population",
-		"constant": true,
-		"effect": funcref(self, "double_population"),
+		"title":"Gynodioecy",
+		"type": "Reproduction",
+		"description": "Version of hermaphroditism. Population is not affected if Distress card targets only one gender. Instant effect: double the population",
+		"one_time_effect": "population: x2",
+		"constant_effect": "hermaphroditism",
 	},
 
 	{
-		"title":"Trioecy (Hermaphroditism)",
-		"trait": "reproduction",
-		"type": " ",
-		"description": "Population is not affected if Distress card targets only one gender. Instant effect: double the population",
-		"constant": true,
-		"effect": funcref(self, "double_population"),
+		"title":"Trioecy",
+		"type": "Reproduction",
+		"description": "Version of hermaphroditism. Population is not affected if Distress card targets only one gender. Instant effect: double the population",
+		"one_time_effect": "population: x2",
+		"constant_effect": "hermaphroditism",
 	},
 
 	{
 		"title":"Fragmentation",
-		"trait": "reproduction",
-		"type": " ",
+		"type": "Reproduction",
 		"description": "Vulnerable to changing environments, parasites",
-		"constant": true,
+		"one_time_effect": null,
+		"constant_effect": "fragmentation",
 	},
 
 	{
 		"title":"Gills",
-		"trait": "breath",
-		"type": "dna",
+		"type": "Breath",
 		"description": "Breathe underwater, always covered with moist on the ground",
-		"constant": true,
+		"one_time_effect": null,
+		"constant_effect": "gills",
 	},
 
 	{
 		"title":"Cutaneous respiration",
-		"trait": "breath",
-		"type": "dna",
-		"description": "Breathe with skin, no lungs. Thin skin",
-		"constant": true,
+		"type": "Breath",
+		"description": "Breathe with skin, no lungs",
+		"one_time_effect": null,
+		"constant_effect": "thin skin",
 	},
 
 	{
 		"title":"Lungs",
-		"trait": "breath",
-		"type": "dna",
+		"type": "Breath",
 		"description": "Breathe with oxygen",
-		"constant": true,
+		"one_time_effect": null,
+		"constant_effect": "lungs",
 	},
 
 	{
 		"title":"Immune response",
-		"trait": "immune",
-		"type": "dna",
+		"type": "Immune",
 		"description": "Viruses has no affect",
-		"constant": true,
+		"one_time_effect": null,
+		"constant_effect": "immune",
 	},
 
 	{
 		"title":"Greenhouse effect",
-		"trait": " ",
-		"type": "planet",
+		"type": "Environment Impact",
 		"description": "+1 hunger if it equals 1 or less. Constant",
-		"constant": true,
-		"effect": funcref(self, "greenhouse_effect_func"),
+		"one_time_effect": null,
+		"constant_effect": funcref(self, "greenhouse_effect_func"),
 	},
 
 	{
-		"title":"Chloroplast (Photosynthesis)",
-		"trait": "nutrition",
-		"type": "class definitive",
-		"description": "Convert light into chemical energy. +2 hunger",
-		"constant": false,
-		"effect": funcref(self, "chloroplast_func"),
+		"title":"Photosynthesis",
+		"type": "Nutrition",
+		"description": "Chloroplast. Convert light into chemical energy. +2 hunger",
+		"one_time_effect": "hunger: +2",
+		"constant_effect": null,
 	},
 
 	{
 		"title":"Go ashore",
-		"trait": " ",
-		"type": "class definitive",
+		"type": "Locomotion",
 		"description": "Leave water and live on the ground",
-		"constant": true,
+		"one_time_effect": "training: +1",
+		"constant_effect": "terrestial",
 	},
 
 	{
 		"title":"Herd instinct",
-		"trait": " ",
 		"type": " ",
 		"description": "Live together (forest)",
-		"constant": true,
+		"one_time_effect": "discipline: +2",
+		"constant_effect": null,
 	},
 
 	{
 		"title":"Herbivore",
-		"trait": " ",
-		"type": " ",
+		"type": "Nutrition",
 		"description": "Eat plants +1 Hunger",
-		"constant": false,
-		"effect": funcref(self, "herbivore_func"),
+		"one_time_effect": "hunger: +1",
+		"constant_effect": null,
 	},
 
 	{
 		"title":"Frugivore",
-		"trait": " ",
-		"type": " ",
-		"description": "Eat fruits +1 Hunger, +1 Happiness",
-		"constant": false,
-		"effect": funcref(self, "frugivore_func"),
+		"type": "Nutrition",
+		"description": "Eat fruits",
+		"one_time_effect": "hunger: +1; happiness: +1",
+		"constant_effect": null,
 	},
 
 	{
 		"title":"Xylophagous",
-		"trait": " ",
-		"type": " ",
-		"description": " ",
-		"constant": true,
+		"type": "Nutrition",
+		"description": "Diet consists of wood",
+		"one_time_effect": null,
+		"constant_effect": "xylophagous",
 	},
 
 	{
 		"title":"Predator",
-		"trait": " ",
-		"type": " ",
+		"type": "Nutrition",
 		"description": "Eat other animals, scavenging sometimes, +2 Hunger",
-		"constant": false,
-		"effect": funcref(self, "predator_func"),
+		"one_time_effect": "hunger: +2",
+		"constant_effect": null,
 	},
 
 	{
 		"title":"Mimicry",
-		"trait": " ",
-		"type": " ",
+		"type": "Deterrent",
 		"description": "Antipredator adaptation. +10 population",
-		"constant": false,
-		"effect": funcref(self, "mimicry_func"),
+		"one_time_effect": "population: +10",
+		"constant_effect": null,
 	},
 
 	{
 		"title":"Camouflage",
-		"trait": " ",
-		"type": " ",
+		"type": "Deterrent",
 		"description": "Antipredator adaptation. +10 population",
-		"constant": false,
-		"effect": funcref(self, "camouflage_func"),
+		"one_time_effect": "population: +10",
+		"constant_effect": null,
 	},
 
 	{
 		"title":"Spine",
-		"trait": "locomotion",
-		"type": "class definitive",
-		"description": " ",
-		"constant": true,
+		"type": "Locomotion",
+		"description": "The population grew a backbone or possibly spinal column",
+		"one_time_effect": "training: +1",
+		"constant_effect": "vertebrate",
 	},
 
 	{
 		"title":"Thorns",
-		"trait": " ",
-		"type": "deterrent",
+		"type": "Deterrent",
 		"description": "Population protected from predators",
-		"constant": true,
+		"one_time_effect": null,
+		"constant_effect": "deterrent",
 	},
 
 	{
-		"title":"Seeds/eggs/spores",
-		"trait": "reproduction",
-		"type": "",
-		"description": "",
-		"constant": true,
+		"title":"Spores",
+		"type": "Reproduction",
+		"description": "Seeds/eggs/spores whichever applies to the current spices",
+		"one_time_effect": "training: +1",
+		"constant_effect": null,
 	}
 ]
 
@@ -259,108 +249,98 @@ func global_flood_func(values, traits):
 var night_shift = [
 	{
 		"title":"Asteroid",
-		"trait": "",
-		"type": "Distress",
+		"type": "Environment Impact",
 		"description": "-10 population -2 hunger",
-		"constant": false,
-		"effect": funcref(self, "asteroid_func"),
+		"one_time_effect": "population: -10; hunger: -2",
+		"constant_effect": null,
 	},
 
 	{
 		"title":"Virus",
-		"trait": "immune",
-		"type": " ",
-		"description": " ",
-		"constant": false,
+		"type": "Immune",
+		"description": "Virus incorporates its DNA into the host system and alters it. Randomly remove one trait. Does nothing if the population is immune",
+		"one_time_effect": funcref(self, "virus_func"),
+		"constant_effect": null,
 	},
 
 	{
 		"title":"Plague",
-		"trait": "breath",
-		"type": " ",
+		"type": "Breath",
 		"description": "Population becomes 10 or 1 if current population was 10. Not affecting if population has no lungs",
-		"constant": false,
-		"effect": funcref(self, "plague_func"),
+		"one_time_effect": funcref(self, "plague_func"),
+		"constant_effect": null,
 	},
 
 	{
 		"title":"Ice Age",
-		"trait": "locomotion",
-		"type": " ",
-		"description": "Giants die, -2 hunger",
-		"constant": false,
-		"effect": funcref(self, "ice_age_func"),
+		"type": "Environment Impact",
+		"description": "Population of giants dies.",
+		"one_time_effect": "hunger: -2",
+		"constant_effect": null,
 	},
 
 	{
 		"title":"Hematophagy",
-		"trait": "nutrition",
-		"type": "dna",
+		"type": "Nutrition",
 		"description": "Vampire trait - has to consume blood to feed their hunger. Hunger -1 on every day",
-		"constant": true,
-		"effect": funcref(self, "henatophagy_func"),
+		"one_time_effect": null,
+		"constant_effect": funcref(self, "hematophagy_func"),
 	},
 
 	{
 		"title":"Genetic recombination",
-		"trait": "immune",
-		"type": "dna",
-		"description": " ",
-		"constant": true,
+		"type": "Interference",
+		"description": "It's time to apply extracurricular DNA samples of pink hair and scaly tail",
+		"one_time_effect": funcref(self, "genetic_recombination_func"),
+		"constant_effect": null,
 	},
 
 	{
-		"title":"Appulse (Parade of the planets)",
-		"trait": " ",
-		"type": " ",
-		"description": "Once in a million years Mercury, Venus, Mars, Jupiter and Saturn all lined up in Space which causes a gravitational effect equal to influence of x10 Moons. Discipline -2",
-		"constant": false,
-		"effect": funcref(self, "appulse_func"),
+		"title":"Parade of the planets",
+		"type": "Environment Impact",
+		"description": "Appulse. Once in a million years Mercury, Venus, Mars, Jupiter and Saturn all lined up in Space which causes a gravitational effect equal to influence of x10 Moons. Discipline -2",
+		"one_time_effect": "discipline: -3",
+		"constant_effect": null,
 	},
 
 	{
-		"title":"Giant",
-		"trait": "locomotion",
-		"type": "dna",
-		"description": "Slow, but mighty -1 hunger ",
-		"constant": true,
-		"effect": funcref(self, "giant_func"),
+		"title":"Giants",
+		"type": "Locomotion",
+		"description": "Slow, but mighty",
+		"one_time_effect": "hunger: -1",
+		"constant_effect": "giants",
 	},
 
 	{
 		"title":"Parasites",
-		"trait": "nutrition",
-		"type": " ",
-		"description": "-1 hunger",
-		"constant": false,
-		"effect": funcref(self, "parasites_func"),
+		"type": "Nutrition",
+		"description": "They make you to eat more",
+		"one_time_effect": "hunger: -1",
+		"constant_effect": null,
 	},
 
 	{
 		"title":"Global warming",
-		"trait": " ",
-		"type": " ",
-		"description": "-1 happiness",
-		"constant": true,
-		"effect": funcref(self, "global_warming_func"),
+		"type": "Environment Impact",
+		"description": "You are a small worm on this planet, how are you going to change climate alone? It's depressing",
+		"one_time_effect": "happiness: -1",
+		"constant_effect": null,
 	},
 
 	{
 		"title":"Heterotrophism",
-		"trait": "nutrition",
-		"type": " ",
-		"description": "Cannot produce nutrition by itself, must consume plants or animals. -1 hunger",
-		"constant": false,
-		"effect": funcref(self, "heterotrophism_func"),
+		"type": "Nutrition",
+		"description": "Cannot produce nutrition by itself, must consume plants or animals",
+		"one_time_effect": "hunger: -1",
+		"constant_effect": null,
 	},
 
 	{
 		"title":"Global flood",
-		"trait": "",
-		"type": "",
-		"description": "-1 happiness, -1 discipline",
-		"constant": false,
-		"effect": funcref(self, "global_flood_func"),
+		"type": "Environment Impact",
+		"description": "You jump on a boat, but after that you are in the new place without old friends",
+		"one_time_effect": "happiness: -1; discipline: -1",
+		"constant_effect": null,
 	},
 
 ]
@@ -377,12 +357,12 @@ func get_new_deck(shift):
 func draw_cards(n, deck):
 	if deck.size() < n:
 		push_error("the deck is small")
-	
+
 	var hand = []
 	for i in range(n):
 		var k = rng.randi_range(0, deck.size() - 1)
 		var card = deck.pop_at(k)
 		hand.append(card)
 	return hand
-	
+
 

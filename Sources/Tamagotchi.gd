@@ -32,13 +32,35 @@ func on_apply_pressed():
 	for discard_id in marked_to_discard:
 		data.hand.remove(discard_id)
 	marked_to_discard = []
-	
-	if data.selected_card.effect:
-		data.selected_card.effect.call_func(data.values, data.traits)
-	if data.selected_card.constant:
-		data.constant_cards.append(data.selected_card)
+
+	if data.selected_card.one_time_effect:
+		if typeof(data.selected_card.one_time_effect) == TYPE_OBJECT:
+			data.selected_card.one_time_effect.call_func(data.values, data.traits)
+		elif typeof(data.selected_card.one_time_effect) == TYPE_STRING:
+			var regex = RegEx.new()
+			regex.compile("(?<meter>\\w+): (?<op>[\\+\\-x])(?<value>\\d+);*")
+			for result in regex.search_all(data.selected_card.one_time_effect):
+				var meter = result.get_string("meter")
+				var op = result.get_string("op")
+				var v = int(result.get_string("value"))
+				var old_value = data.values[meter]
+				var new_value
+				match op:
+					"+":
+						new_value = old_value + v
+					"-":
+						new_value = old_value - v
+					"x":
+						new_value = old_value * v
+				data.values[meter] = new_value
+
+	if data.selected_card.constant_effect:
+		if typeof(data.selected_card.constant_effect) == TYPE_OBJECT:
+			data.constant_cards.append(data.selected_card)
+		elif typeof(data.selected_card.constant_effect) == TYPE_STRING:
+			data.traits.append(data.selected_card.constant_effect)
 	data.hand.erase(data.selected_card)
-	
+
 	emit_signal("apply_pressed", data)
 
 func on_menu_pressed():
@@ -46,7 +68,7 @@ func on_menu_pressed():
 
 func update_scene(day, control_data):
 	data = control_data
-	
+
 	$Day.text = str(day)
 	var values = control_data.values
 	$Population.text = str(values.population)
@@ -66,7 +88,7 @@ func update_scene(day, control_data):
 		var card = hand[i]
 		card_object.set_card(i, card)
 		card_object.reveal()
-	
+
 	data.selected_card = null
 	marked_to_discard = []
 	$Status.text = "Select a card to play at this " + control_data.player_shift
@@ -88,7 +110,7 @@ func update_modifiers(scale_name, values, scale_value):
 			modifiers = $GridContainer/HappinessContainer/AffectPopulation
 		"discipline":
 			modifiers = $GridContainer/DisciplineContainer/AffectPopulation
-	
+
 	for i in range(modifiers.get_child_count()):
 		var label = modifiers.get_node(str(i + 1))
 		label.text = str(values[i])
@@ -105,7 +127,7 @@ func update_scale(scale_name, value):
 			scale = $GridContainer/DisciplineContainer/Scale
 		"training":
 			scale = $TrainingLabel/Scale
-	
+
 	for i in range(scale.get_child_count()):
 		var tile = scale.get_node(str(i + 1))
 		tile.color = scale_colors[i] if value >= (i + 1) else OFF_COLOR
@@ -115,7 +137,7 @@ func on_card_selected(card_id):
 		data.selected_card = null
 		set_card_state(card_id, "")
 		for discard_id in marked_to_discard:
-			set_card_state(discard_id, "")	
+			set_card_state(discard_id, "")
 		marked_to_discard = []
 		$Status.text = "Select a card to play at this " + data.player_shift
 		$Apply.disabled = true

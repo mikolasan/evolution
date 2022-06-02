@@ -8,50 +8,45 @@ onready var table_position = get_rect().position
 func _ready():
 	pass
 
-func get_color_for_trait(trait):
-	var color
-	match trait:
-		"reproduction":
-			color = Color("c0ca49")
-		"breath":
-			color = Color("379538")
-		"immune":
-			color = Color("643795")
-		"nutrition":
-			color = Color("8a3795")
-		"locomotion":
-			color = Color("373f95")
-		_:
-			color = Color("ca4949")
-	return color
-
 func get_color_for_type(type):
 	var color
 	match type:
-		"dna":
-			color = Color("")
-		"class defenitive":
-			color = Color("")
-		"planet":
-			color = Color("")
+		"Environment Impact":
+			color = Color("c0ca49")
+		"Deterrent":
+			color = Color("379538")
+		"Trait":
+			color = Color("643795")
+		"Interference":
+			color = Color("8a3795")
+
+		"Reproduction":
+			color = Color("c0ca49")
+		"Breath":
+			color = Color("379538")
+		"Immune":
+			color = Color("643795")
+		"Nutrition":
+			color = Color("8a3795")
+		"Locomotion":
+			color = Color("373f95")
+
 		_:
-			color = Color("")
-		
+			color = Color("ca4949")
+
 	return color
 
 # Card example:
-#   "title":"Global flood",
-#   "trait": "",
-#   "type": "",
-#   "description": "-1 happiness, -1 discipline",
-#   "constant": false,
-#   "effect": funcref(self, "global_flood_func"),
+#  "title":"Global flood",
+#  "type": "Environment Impact",
+#  "description": "You jump on a boat, but after that you are in the new place without old friends",
+#  "one_time_effect": "happiness: -1; discipline: -1",
+#  "constant_effect": null,
 func set_card(card_id, card):
 	self.card_id = card_id
 	var container = $MarginContainer/VBoxContainer
 	container.get_node("Title").text = card.title
-	get_node("Background").color = get_color_for_trait(card.trait)
-#	container.get_node("TypeAccent").color = get_color_for_type(card.type)
+	get_node("Background").color = get_color_for_type(card.type)
 	container.get_node("Type").text = card.type
 	container.get_node("Description").text = card.description
 	set_state("")
