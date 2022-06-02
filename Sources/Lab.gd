@@ -44,6 +44,7 @@ var control_data = {
 	traits = traits,
 	hand = hand,
 	selected_card = selected_card,
+	opponent_card = null,
 	discard_pile = discard_pile,
 	constant_cards = constant_cards
 }
@@ -78,6 +79,16 @@ func next_day(data):
 
 func update_scene():
 	update_labels()
+	
+	# update opponent's card
+	var card_object = $DiscardPile/Card
+	var card = control_data.opponent_card
+	if not card:
+		card_object.hide()
+		return
+		
+	card_object.set_card(0, card)
+	card_object.show()
 
 func set_shift(shift):
 	player_shift = shift
@@ -126,11 +137,7 @@ func apply_population_modifiers(data):
 				population = population + modifiers[meter][meter_value - 1]
 	data.values.population = population
 
-func test_card(card, data):
-	var impact = 0
-	
-	var data_before = data.duplicate(true)
-	
+func apply_card_effects(card, data):
 	if card.one_time_effect:
 		if typeof(card.one_time_effect) == TYPE_OBJECT:
 			card.one_time_effect.call_func(data.values, data.traits)
@@ -157,19 +164,27 @@ func test_card(card, data):
 			card.constant_effect.call_func(data.values, data.traits)
 		elif typeof(card.constant_effect) == TYPE_STRING:
 			data.traits.append(card.constant_effect)
-	apply_population_modifiers(data)
+
+func test_card(card, data):
+	var impact = 0
+	
+	var data_before = data.duplicate(true)
+	
+	apply_card_effects(card, data)
+#	apply_population_modifiers(data)
 
 	var meters = [
 		{ "meter": "population", "weight": 1 },
-		{ "meter": "hunger", "weight": 1 },
+		{ "meter": "hunger", "weight": 1.5 },
 		{ "meter": "happiness", "weight": 1 },
 		{ "meter": "discipline", "weight": 1 },
-		{ "meter": "training", "weight": 1 },
+		{ "meter": "training", "weight": 2 },
 	]
 	for config in meters:
-		var diff = data[config.meter] - data_before[config.meter]
-		var weighted_diff = diff * config.weight
-		impact = impact + abs(diff)
+		var diff = data.values[config.meter] - data_before.values[config.meter]
+		var weighted_diff = abs(diff * config.weight)
+		impact = impact + weighted_diff
+		if weighted_diff > 0: printt(card.title, data_before.values[config.meter], data.values[config.meter], config.meter, weighted_diff, impact)
 	
 	return impact
 
@@ -192,7 +207,9 @@ func play_opponent_shift():
 	# sort cards in the hand
 	opponent_hand.sort_custom(CardSorter, "sort_descending")
 	
-	var selected_card = opponent_hand.pop_front()
+	var opponent_card = opponent_hand.pop_front()
+	apply_card_effects(opponent_card, control_data)
+	control_data.opponent_card = opponent_card
 	
 	# discard 2 cards
 	if opponent_hand.size() > 1: opponent_hand.pop_back()

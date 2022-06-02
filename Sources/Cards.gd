@@ -1,31 +1,13 @@
 extends Node
 
-func double_population(values, traits):
-	values.population = values.population * 2
+var rng = RandomNumberGenerator.new()
+
+func _ready():
+	rng.randomize()
 
 func greenhouse_effect_func(values, traits):
 	if values.hunger <= 1:
 		values.hunger = values.hunger + 1
-
-func chloroplast_func(values, traits):
-	values.hunger = values.hunger + 2
-
-func herbivore_func(values, traits):
-	values.hunger = values.hunger + 1
-
-func frugivore_func(values, traits):
-	values.hunger = values.hunger + 1
-	values.happiness = values.happiness + 1
-
-func predator_func(values, traits):
-	values.hunger = values.hunger + 2
-
-func mimicry_func(values, traits):
-	values.population = values.population + 10
-
-func camouflage_func(values, traits):
-	values.population = values.population + 10
-
 
 var day_shift = [
 	{
@@ -205,10 +187,12 @@ var day_shift = [
 	}
 ]
 
-
-func asteroid_func(values, traits):
-	values.population = values.population - 10
-	values.hunger = values.hunger - 2
+func virus_func(values, traits):
+	if "immune" in traits: return
+	if traits.empty(): return
+	
+	var k = rng.randi_range(0, traits.size() - 1)
+	traits.pop_at(k)
 
 func plague_func(values, traits):
 	if not ('lungs' in traits):
@@ -218,33 +202,14 @@ func plague_func(values, traits):
 	else:
 		values.population = 10
 
-func ice_age_func(values, traits):
-	values.hunger = values.hunger - 2
-	if 'giant' in traits:
-		values.population = 0
-
-func henatophagy_func(values, traits):
+func hematophagy_func(values, traits):
 	values.hunger = values.hunger - 1
 
-func appulse_func(values, traits):
-	values.discipline = values.discipline  - 2
-
-func giant_func(values, traits):
-	values.hunger = values.hunger - 1
-	traits.append("giant")
-
-func parasites_func(values, traits):
-	values.hunger = values.hunger - 1
-
-func global_warming(values, traits):
-	values.happiness = values.happiness - 1
-
-func heterotrophism_func(values, traits):
-	values.hunger = values.hunger - 1
-
-func global_flood_func(values, traits):
-	values.happiness = values.happiness - 1
-	values.discipline = values.discipline  - 1
+func genetic_recombination_func(values, traits):
+	var new_traits = ["fluorescent", "infertile", "immortal", "hairy", "Benjamin Button"]
+	var k = rng.randi_range(0, new_traits.size() - 1)
+	var new_trait = new_traits[k]
+	traits.append(new_trait)
 
 var night_shift = [
 	{
@@ -345,11 +310,6 @@ var night_shift = [
 
 ]
 
-var rng = RandomNumberGenerator.new()
-
-func _ready():
-	rng.randomize()
-
 func get_new_deck(shift):
 	var deck = day_shift if shift == "day" else night_shift
 	return deck.duplicate(true)
@@ -357,6 +317,7 @@ func get_new_deck(shift):
 func draw_cards(n, deck):
 	if deck.size() < n:
 		push_error("the deck is small")
+		return []
 
 	var hand = []
 	for i in range(n):

@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Resources/Menu.theme" type="Theme" id=1]
 [ext_resource path="res://Sources/Lab.gd" type="Script" id=2]
 [ext_resource path="res://Resources/SmallFont.tres" type="DynamicFont" id=3]
 [ext_resource path="res://Assets/scientist.png" type="Texture" id=4]
+[ext_resource path="res://Scenes/Card.tscn" type="PackedScene" id=5]
 
 [node name="Lab" type="Node2D"]
 script = ExtResource( 2 )
@@ -27,10 +28,10 @@ theme = ExtResource( 1 )
 text = "MENU"
 
 [node name="GotoControl" type="Button" parent="."]
-margin_left = 732.0
-margin_top = 318.0
-margin_right = 1182.0
-margin_bottom = 410.0
+margin_left = 607.0
+margin_top = 474.0
+margin_right = 1057.0
+margin_bottom = 566.0
 theme = ExtResource( 1 )
 text = "Do work"
 
@@ -62,51 +63,51 @@ custom_fonts/font = ExtResource( 3 )
 text = "Player SHIFT"
 
 [node name="Opponent" type="Label" parent="."]
-margin_left = 698.0
-margin_top = 884.0
-margin_right = 978.0
-margin_bottom = 1016.0
+margin_left = 1274.0
+margin_top = 50.0
+margin_right = 1554.0
+margin_bottom = 182.0
 theme = ExtResource( 1 )
 text = "Opponent"
 
 [node name="OpponentShift" type="Label" parent="."]
-margin_left = 1046.0
-margin_top = 909.0
-margin_right = 1470.0
-margin_bottom = 1041.0
+margin_left = 1274.0
+margin_top = 182.0
+margin_right = 1698.0
+margin_bottom = 314.0
 theme = ExtResource( 1 )
 custom_fonts/font = ExtResource( 3 )
 text = "Opponent SHIFT"
 
 [node name="PopulationLabel" type="Label" parent="."]
-margin_left = 732.0
-margin_top = 476.0
-margin_right = 1080.0
-margin_bottom = 608.0
+margin_left = 607.0
+margin_top = 271.0
+margin_right = 955.0
+margin_bottom = 403.0
 theme = ExtResource( 1 )
 text = "Population"
 
 [node name="Population" type="Label" parent="."]
-margin_left = 1080.0
-margin_top = 476.0
-margin_right = 1428.0
-margin_bottom = 608.0
+margin_left = 955.0
+margin_top = 271.0
+margin_right = 1303.0
+margin_bottom = 403.0
 theme = ExtResource( 1 )
 text = "0"
 
 [node name="DayLabel" type="Label" parent="."]
-margin_left = 732.0
-margin_top = 608.0
-margin_right = 1080.0
-margin_bottom = 740.0
+margin_left = 562.0
+margin_top = 784.0
+margin_right = 910.0
+margin_bottom = 916.0
 theme = ExtResource( 1 )
 text = "Day"
 
 [node name="Day" type="Label" parent="."]
-margin_left = 1080.0
-margin_top = 608.0
-margin_right = 1428.0
-margin_bottom = 740.0
+margin_left = 715.0
+margin_top = 784.0
+margin_right = 819.0
+margin_bottom = 916.0
 theme = ExtResource( 1 )
 text = "0"
 
@@ -121,11 +122,13 @@ custom_fonts/font = ExtResource( 3 )
 text = "Discard pile"
 
 [node name="DiscardPile" type="HBoxContainer" parent="."]
-visible = false
-margin_left = 1428.0
-margin_top = 109.0
-margin_right = 1596.0
-margin_bottom = 375.0
+margin_left = 1274.0
+margin_top = 271.0
+margin_right = 1554.0
+margin_bottom = 691.0
+
+[node name="Card" parent="DiscardPile" instance=ExtResource( 5 )]
+margin_right = 0.0
 
 [node name="Avatar" type="Sprite" parent="."]
 position = Vector2( 350, 643 )
