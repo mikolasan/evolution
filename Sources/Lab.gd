@@ -43,6 +43,7 @@ var control_data = {
 	population_modifiers = meters_affect_population,
 	traits = traits,
 	hand = hand,
+	new_cards = [],
 	selected_card = selected_card,
 	opponent_card = null,
 	discard_pile = discard_pile,
@@ -96,14 +97,15 @@ func set_shift(shift):
 	$PlayerShift.text = player_shift + " shift"
 	opponent_shift = get_opponent_shift()
 	$OpponentShift.text = opponent_shift + " shift"
+	
+	$DayLabel.text = player_shift
 
 func on_menu_pressed():
 	emit_signal("menu_pressed")
 
 func on_goto_control_pressed():
-	var cards = Cards.draw_cards(HAND_MAX_N_CARDS - hand.size(), get_deck(player_shift))
-	for card in cards:
-		hand.append(card)
+	var new_cards = Cards.draw_cards(HAND_MAX_N_CARDS - hand.size(), get_deck(player_shift))
+	control_data.new_cards = new_cards
 	emit_signal("goto_control_pressed", day, control_data)
 
 func on_end_day_pressed():

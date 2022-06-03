@@ -6,7 +6,7 @@ func _ready():
 	$Lab.connect("menu_pressed", self, "show_menu")
 	$Lab.connect("end_day_pressed", self, "next_turn")
 	$Lab.connect("goto_control_pressed", self, "show_control")
-	$Control.connect("apply_pressed", self, "show_lab")
+	$Control.connect("apply_pressed", self, "show_results")
 	$Control.connect("menu_pressed", self, "show_menu")
 
 #	$StateMachinePlayer.set_trigger("ready")
@@ -31,10 +31,14 @@ func _show_start_menu():
 	get_tree().call_group_flags(SceneTree.GROUP_CALL_REALTIME, "StartMenuShow", "hide")
 	$Start.show()
 
-func show_lab(control_data):
+func show_lab():
 	get_tree().call_group_flags(SceneTree.GROUP_CALL_REALTIME, "LabShow", "hide")
-	$Lab.next_day(control_data)
 	$Lab.show()
+
+func show_results(control_data):
+	$AnimationPlayer.play("Results")
+	$Results.update_scene(control_data)
+	$Lab.next_day(control_data)
 
 func show_control(day, control_data):
 	get_tree().call_group_flags(SceneTree.GROUP_CALL_REALTIME, "ControlShow", "hide")
@@ -58,3 +62,10 @@ func on_player_animation_finished(anim_name):
 			pass
 		"Show Main":
 			pass
+
+func _input(event):
+	if event is InputEventKey and event.scancode == KEY_SPACE:
+		if $AnimationPlayer.current_animation == "Start":
+			$AnimationPlayer.advance(4)
+		elif $Results.visible and $Results.shown:
+			$AnimationPlayer.play("Next day")

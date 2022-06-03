@@ -59,9 +59,9 @@ var day_shift = [
 	},
 
 	{
-		"title":"Cutaneous respiration",
+		"title":"Skin Breathing",
 		"type": "Breath",
-		"description": "Breathe with skin, no lungs",
+		"description": "Cutaneous respiration which is breathe with skin, so simply speaking no lungs involved",
 		"one_time_effect": null,
 		"constant_effect": "thin skin",
 	},
@@ -88,6 +88,9 @@ var day_shift = [
 		"description": "+1 hunger if it equals 1 or less. Constant",
 		"one_time_effect": null,
 		"constant_effect": funcref(self, "greenhouse_effect_func"),
+		"constant_effect_description": "+1 hunger if it equals 1 or less",
+		"constant_effect_meter": "hunger",
+		"constant_effect_impact": "positive",
 	},
 
 	{
@@ -99,7 +102,7 @@ var day_shift = [
 	},
 
 	{
-		"title":"Go ashore",
+		"title":"Terrestial",
 		"type": "Locomotion",
 		"description": "Leave water and live on the ground",
 		"one_time_effect": "training: +1",
@@ -107,8 +110,8 @@ var day_shift = [
 	},
 
 	{
-		"title":"Herd instinct",
-		"type": " ",
+		"title":"Herding",
+		"type": "Trait",
 		"description": "Live together (forest)",
 		"one_time_effect": "discipline: +2",
 		"constant_effect": null,
@@ -234,6 +237,9 @@ var night_shift = [
 		"description": "Population becomes 10 or 1 if current population was 10. Not affecting if population has no lungs",
 		"one_time_effect": funcref(self, "plague_func"),
 		"constant_effect": null,
+		"one_time_effect_description": "Population becomes 10 or 1 if current population was 10",
+		"one_time_effect_meter": "population",
+		"one_time_effect_impact": "negative",
 	},
 
 	{
@@ -250,20 +256,23 @@ var night_shift = [
 		"description": "Vampire trait - has to consume blood to feed their hunger. Hunger -1 on every day",
 		"one_time_effect": null,
 		"constant_effect": funcref(self, "hematophagy_func"),
+		"constant_effect_description": "Hunger -1 on every day",
+		"constant_effect_meter": "hunger",
+		"constant_effect_impact": "negative",
 	},
 
 	{
-		"title":"Genetic recombination",
+		"title":"GMO",
 		"type": "Interference",
-		"description": "It's time to apply extracurricular DNA samples of pink hair and scaly tail",
+		"description": "Genetic recombination. It's time to apply extracurricular DNA samples of pink hair and scaly tail",
 		"one_time_effect": funcref(self, "genetic_recombination_func"),
 		"constant_effect": null,
 	},
 
 	{
-		"title":"Parade of the planets",
+		"title":"Appulse",
 		"type": "Environment Impact",
-		"description": "Appulse. Once in a million years Mercury, Venus, Mars, Jupiter and Saturn all lined up in Space which causes a gravitational effect equal to influence of x10 Moons. Discipline -2",
+		"description": "Parade of the planets. Once in a million years Mercury, Venus, Mars, Jupiter and Saturn all lined up in Space which causes a gravitational effect equal to influence of x10 Moons. Discipline -2",
 		"one_time_effect": "discipline: -3",
 		"constant_effect": null,
 	},

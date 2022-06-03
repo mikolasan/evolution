@@ -17,6 +17,7 @@ const scale_colors = [
 ]
 const OFF_COLOR = Color("3a3a3a")
 
+var animate_cards = []
 var marked_to_discard = []
 var data = {
 	selected_card = null
@@ -26,6 +27,7 @@ func _ready():
 	for i in $Hand.get_child_count():
 		var card_object = get_card_object(i)
 		card_object.connect("card_selected", self, "on_card_selected", [i])
+		card_object.connect("card_revealed", self, "on_card_revealed", [i])
 	$Status.text = "Drawing cards for new hand..."
 
 func on_apply_pressed():
@@ -61,6 +63,7 @@ func on_apply_pressed():
 			data.traits.append(data.selected_card.constant_effect)
 	data.hand.erase(data.selected_card)
 
+	$Apply.disabled = true
 	emit_signal("apply_pressed", data)
 
 func on_menu_pressed():
@@ -80,19 +83,37 @@ func update_scene(day, control_data):
 		update_scale(meter, values[meter])
 
 	var traits = control_data.traits
+	animate_cards = []
 	var hand = control_data.hand
+	var new_cards = control_data.new_cards
 	for i in $Hand.get_child_count():
 		var card_object = get_card_object(i)
+		card_object.show()
 		if i >= hand.size():
-			card_object.hide()
+			if not new_cards.empty():
+				var card = new_cards.pop_front()
+				hand.append(card)
+				animate_cards.append(i)
+				card_object.hide()
+			else:
+				card_object.hide()
+				continue
 		var card = hand[i]
 		card_object.set_card(i, card)
-		card_object.reveal()
 
 	data.selected_card = null
 	marked_to_discard = []
 	$Status.text = "Select a card to play at this " + control_data.player_shift
 	$Apply.disabled = true
+	
+	animate_card_drawing()
+
+func animate_card_drawing():
+	if animate_cards.empty(): return
+	var card_id = animate_cards.pop_front()
+	var card_object = get_card_object(card_id)
+	card_object.show()
+	card_object.reveal($Deck.rect_position, $Deck.rect_size)
 
 func get_card_object(card_id):
 	return $Hand.get_node("Card" + str(card_id + 1))
@@ -159,3 +180,6 @@ func on_card_selected(card_id):
 		else:
 			$Status.text = "Select two cards to discard"
 			$Apply.disabled = true
+
+func on_card_revealed(card_id):
+	animate_card_drawing()
