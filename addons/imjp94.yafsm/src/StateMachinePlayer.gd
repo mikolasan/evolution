@@ -1,4 +1,3 @@
-tool
 extends "StackPlayer.gd"
 const State = preload("states/State.gd")
 

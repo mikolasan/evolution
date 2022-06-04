@@ -6,10 +6,10 @@ func _ready():
 	$Lab.connect("menu_pressed", self, "show_menu")
 	$Lab.connect("end_day_pressed", self, "next_turn")
 	$Lab.connect("goto_control_pressed", self, "show_control")
+	$Results.connect("result_shown", self, "on_result_shown")
 	$Control.connect("apply_pressed", self, "show_results")
 	$Control.connect("menu_pressed", self, "show_menu")
 
-#	$StateMachinePlayer.set_trigger("ready")
 	get_tree().call_group_flags(SceneTree.GROUP_CALL_REALTIME, "Ready", "hide")
 	$AnimationPlayer.play("Splash")
 
@@ -36,9 +36,19 @@ func show_lab():
 	$Lab.show()
 
 func show_results(control_data):
+	$Lab.control_data = control_data
+	$Results.show_player(control_data)
+	$Lab.apply_constant_card_effects()
+	$Lab.apply_population_modifiers(control_data)
 	$AnimationPlayer.play("Results")
-	$Results.update_scene(control_data)
-	$Lab.next_day(control_data)
+
+func on_result_shown(player):
+	if player == "player":
+		$Lab.play_opponent_shift()
+		$Results.show_opponent($Lab.control_data)
+	else:
+		$Lab.next_day($Lab.control_data)
+		show_lab()
 
 func show_control(day, control_data):
 	get_tree().call_group_flags(SceneTree.GROUP_CALL_REALTIME, "ControlShow", "hide")

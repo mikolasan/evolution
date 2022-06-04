@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://Scenes/MainMenu.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scenes/StartMenu.tscn" type="PackedScene" id=2]
@@ -6,11 +6,7 @@
 [ext_resource path="res://Scenes/Lab.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Scenes/Tamagotchi.tscn" type="PackedScene" id=5]
 [ext_resource path="res://splash.png" type="Texture" id=6]
-[ext_resource path="res://addons/imjp94.yafsm/src/states/State.gd" type="Script" id=7]
-[ext_resource path="res://addons/imjp94.yafsm/src/StateMachinePlayer.gd" type="Script" id=8]
-[ext_resource path="res://addons/imjp94.yafsm/src/states/StateMachine.gd" type="Script" id=9]
-[ext_resource path="res://addons/imjp94.yafsm/src/transitions/Transition.gd" type="Script" id=10]
-[ext_resource path="res://addons/imjp94.yafsm/src/conditions/Condition.gd" type="Script" id=11]
+[ext_resource path="res://Resources/Menu.theme" type="Theme" id=7]
 [ext_resource path="res://Assets/scenery1.png" type="Texture" id=12]
 [ext_resource path="res://Assets/scenery2.png" type="Texture" id=13]
 [ext_resource path="res://Scenes/ShiftEnd.tscn" type="PackedScene" id=14]
@@ -253,96 +249,17 @@ tracks/4/keys = {
 "update": 1,
 "values": [ false, true, false ]
 }
-
-[sub_resource type="Resource" id=3]
-script = ExtResource( 7 )
-__meta__ = {
-"graph_offset": Vector2( 108, 180 )
-}
-name = "Entry"
-
-[sub_resource type="Resource" id=4]
-script = ExtResource( 7 )
-__meta__ = {
-"graph_offset": Vector2( 348, 160 )
-}
-name = "Splash"
-
-[sub_resource type="Resource" id=5]
-script = ExtResource( 7 )
-__meta__ = {
-"graph_offset": Vector2( 548, 220 )
-}
-name = "Main"
-
-[sub_resource type="Resource" id=6]
-script = ExtResource( 7 )
-__meta__ = {
-"graph_offset": Vector2( 588, 100 )
-}
-name = "Exit"
-
-[sub_resource type="Resource" id=13]
-script = ExtResource( 7 )
-__meta__ = {
-"graph_offset": Vector2( 288, 60 )
-}
-name = "State"
-
-[sub_resource type="Resource" id=7]
-script = ExtResource( 11 )
-name = "ready"
-
-[sub_resource type="Resource" id=8]
-script = ExtResource( 10 )
-from = "Entry"
-to = "Splash"
-conditions = {
-"ready": SubResource( 7 )
-}
-priority = 0
-
-[sub_resource type="Resource" id=12]
-script = ExtResource( 11 )
-name = "splash_shown"
-
-[sub_resource type="Resource" id=9]
-script = ExtResource( 10 )
-from = "Splash"
-to = "Main"
-conditions = {
-"splash_shown": SubResource( 12 )
-}
-priority = 0
-
-[sub_resource type="Resource" id=10]
-script = ExtResource( 10 )
-from = "Main"
-to = "Exit"
-conditions = {
-}
-priority = 0
-
-[sub_resource type="Resource" id=11]
-script = ExtResource( 9 )
-name = ""
-states = {
-"Entry": SubResource( 3 ),
-"Exit": SubResource( 6 ),
-"Main": SubResource( 5 ),
-"Splash": SubResource( 4 ),
-"State": SubResource( 13 )
-}
-transitions = {
-"Entry": {
-"Splash": SubResource( 8 )
-},
-"Main": {
-"Exit": SubResource( 10 )
-},
-"Splash": {
-"Main": SubResource( 9 )
-}
+tracks/5/type = "value"
+tracks/5/path = NodePath("Hint:visible")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0, 1.7 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
 }
 
 [node name="Game" type="Node2D"]
@@ -364,10 +281,6 @@ anims/Results = SubResource( 14 )
 anims/Splash = SubResource( 1 )
 anims/Start = SubResource( 2 )
 
-[node name="StateMachinePlayer" type="Node" parent="."]
-script = ExtResource( 8 )
-state_machine = SubResource( 11 )
-
 [node name="Splash" type="Sprite" parent="."]
 visible = false
 texture = ExtResource( 6 )
@@ -383,15 +296,25 @@ visible = false
 texture = ExtResource( 13 )
 offset = Vector2( 840, 525 )
 
-[node name="Results" parent="." groups=["Ready"] instance=ExtResource( 14 )]
+[node name="Results" parent="." groups=["LabShow", "Ready"] instance=ExtResource( 14 )]
+visible = false
 
 [node name="Curtain" type="ColorRect" parent="."]
-modulate = Color( 0, 0, 0, 1 )
+visible = false
+modulate = Color( 0, 0, 0, 0.5 )
 margin_right = 1680.0
 margin_bottom = 1050.0
 rect_pivot_offset = Vector2( -136, 24 )
 mouse_filter = 2
 color = Color( 0, 0, 0, 1 )
 
+[node name="Hint" type="Label" parent="."]
+visible = false
+margin_top = 919.0
+margin_right = 1680.0
+margin_bottom = 1051.0
+theme = ExtResource( 7 )
+text = "Press SPACE to skip"
+align = 1
+
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="on_player_animation_finished"]
-[connection signal="updated" from="StateMachinePlayer" to="." method="on_state_machine_updated"]

@@ -71,10 +71,6 @@ func update_labels():
 	$Day.text = str(day)
 
 func next_day(data):
-	control_data = data
-	apply_constant_card_effects()
-	apply_population_modifiers(control_data)
-	play_opponent_shift()
 	day = day + 1
 	update_scene()
 
@@ -186,7 +182,7 @@ func test_card(card, data):
 		var diff = data.values[config.meter] - data_before.values[config.meter]
 		var weighted_diff = abs(diff * config.weight)
 		impact = impact + weighted_diff
-		if weighted_diff > 0: printt(card.title, data_before.values[config.meter], data.values[config.meter], config.meter, weighted_diff, impact)
+#		if weighted_diff > 0: printt(card.title, data_before.values[config.meter], data.values[config.meter], config.meter, weighted_diff, impact)
 	
 	return impact
 

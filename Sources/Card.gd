@@ -70,6 +70,13 @@ func set_card(card_id, card):
 					$TrainingIcon/Label.text = op + value
 				"population":
 					pass
+	
+	$BackSide.hide()
+
+func close_card():
+	$BackSide.show()
+
+func open_card():
 	$BackSide.hide()
 
 func set_state(state):
@@ -112,7 +119,7 @@ func on_tween_completed(object, key):
 		$BackSide.hide()
 		emit_signal("card_revealed")
 
-
 func on_tween_step(object, key, elapsed, value):
-	if key.get_subname(0) == "rect_scale":
-		print(elapsed, value)
+	pass
+#	if key.get_subname(0) == "rect_scale":
+#		print(elapsed, value)

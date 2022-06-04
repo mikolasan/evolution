@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=29 format=2]
 
 [ext_resource path="res://Resources/Menu.theme" type="Theme" id=1]
 [ext_resource path="res://Resources/SmallFont.tres" type="DynamicFont" id=2]
@@ -7,10 +7,186 @@
 [ext_resource path="res://Sources/ShiftEnd.gd" type="Script" id=5]
 [ext_resource path="res://Scenes/Card.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Assets/Fonts/Bebas-Regular.ttf" type="DynamicFontData" id=7]
+[ext_resource path="res://Assets/scientist.png" type="Texture" id=8]
+[ext_resource path="res://addons/imjp94.yafsm/src/StateMachinePlayer.gd" type="Script" id=9]
+[ext_resource path="res://addons/imjp94.yafsm/src/states/State.gd" type="Script" id=10]
+[ext_resource path="res://addons/imjp94.yafsm/src/conditions/Condition.gd" type="Script" id=11]
+[ext_resource path="res://addons/imjp94.yafsm/src/transitions/Transition.gd" type="Script" id=12]
+[ext_resource path="res://addons/imjp94.yafsm/src/states/StateMachine.gd" type="Script" id=13]
 
 [sub_resource type="DynamicFont" id=1]
 size = 30
 font_data = ExtResource( 7 )
+
+[sub_resource type="Animation" id=2]
+resource_name = "Show opponent"
+tracks/0/type = "value"
+tracks/0/path = NodePath("OpponentPicture:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.6 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1887, 614 ), Vector2( 1551, 614 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Card:rect_position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.6, 0.9 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1729, 185 ), Vector2( 1729, 185 ), Vector2( 1171, 103 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Card:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, true ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("OpponentPicture:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, true ]
+}
+tracks/4/type = "method"
+tracks/4/path = NodePath(".")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0.6, 0.9 ),
+"transitions": PoolRealArray( 1, 1 ),
+"values": [ {
+"args": [  ],
+"method": "hide_opponent_card"
+}, {
+"args": [  ],
+"method": "show_opponent_card"
+} ]
+}
+
+[sub_resource type="Resource" id=3]
+script = ExtResource( 10 )
+__meta__ = {
+"graph_offset": Vector2( 108, 180 )
+}
+name = "Entry"
+
+[sub_resource type="Resource" id=6]
+script = ExtResource( 10 )
+__meta__ = {
+"graph_offset": Vector2( 828, 140 )
+}
+name = "Exit"
+
+[sub_resource type="Resource" id=4]
+script = ExtResource( 10 )
+__meta__ = {
+"graph_offset": Vector2( 347.5, 180 )
+}
+name = "Player"
+
+[sub_resource type="Resource" id=12]
+script = ExtResource( 10 )
+__meta__ = {
+"graph_offset": Vector2( 528, 40 )
+}
+name = "Opponent"
+
+[sub_resource type="Resource" id=7]
+script = ExtResource( 11 )
+name = "player"
+
+[sub_resource type="Resource" id=8]
+script = ExtResource( 12 )
+from = "Entry"
+to = "Player"
+conditions = {
+"player": SubResource( 7 )
+}
+priority = 0
+
+[sub_resource type="Resource" id=17]
+script = ExtResource( 11 )
+name = "never_exit"
+
+[sub_resource type="Resource" id=10]
+script = ExtResource( 12 )
+from = "Player"
+to = "Exit"
+conditions = {
+"never_exit": SubResource( 17 )
+}
+priority = 0
+
+[sub_resource type="Resource" id=13]
+script = ExtResource( 11 )
+name = "opponent"
+
+[sub_resource type="Resource" id=14]
+script = ExtResource( 12 )
+from = "Player"
+to = "Opponent"
+conditions = {
+"opponent": SubResource( 13 )
+}
+priority = 0
+
+[sub_resource type="Resource" id=15]
+script = ExtResource( 11 )
+name = "player"
+
+[sub_resource type="Resource" id=16]
+script = ExtResource( 12 )
+from = "Opponent"
+to = "Player"
+conditions = {
+"player": SubResource( 15 )
+}
+priority = 0
+
+[sub_resource type="Resource" id=11]
+script = ExtResource( 13 )
+name = ""
+states = {
+"Entry": SubResource( 3 ),
+"Exit": SubResource( 6 ),
+"Opponent": SubResource( 12 ),
+"Player": SubResource( 4 )
+}
+transitions = {
+"Entry": {
+"Player": SubResource( 8 )
+},
+"Opponent": {
+"Player": SubResource( 16 )
+},
+"Player": {
+"Exit": SubResource( 10 ),
+"Opponent": SubResource( 14 )
+}
+}
 
 [node name="Results" type="Node2D"]
 script = ExtResource( 5 )
@@ -477,10 +653,10 @@ Two
 Three"
 
 [node name="Card" parent="." instance=ExtResource( 6 )]
-margin_left = 1248.0
-margin_top = 201.0
-margin_right = 1248.0
-margin_bottom = 621.0
+margin_left = 1729.0
+margin_top = 185.0
+margin_right = 2009.0
+margin_bottom = 605.0
 
 [node name="TrainingLabel" type="Label" parent="."]
 margin_left = 664.0
@@ -542,7 +718,27 @@ rect_min_size = Vector2( 40, 40 )
 size_flags_vertical = 4
 color = Color( 0.2, 0.819608, 0, 1 )
 
-[node name="Timer" type="Timer" parent="."]
+[node name="SequenceTimer" type="Timer" parent="."]
 one_shot = true
 
-[connection signal="timeout" from="Timer" to="." method="on_timer_timeout"]
+[node name="OpponentPicture" type="Sprite" parent="."]
+position = Vector2( 1551, 614 )
+texture = ExtResource( 8 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+"anims/Show opponent" = SubResource( 2 )
+
+[node name="Timer" type="Timer" parent="."]
+
+[node name="Tween" type="Tween" parent="."]
+repeat = true
+playback_speed = 2.0
+playback/repeat = true
+playback/speed = 2.0
+
+[node name="StateMachinePlayer" type="Node" parent="."]
+script = ExtResource( 9 )
+state_machine = SubResource( 11 )
+
+[connection signal="timeout" from="SequenceTimer" to="." method="on_timer_timeout"]
+[connection signal="tween_step" from="Tween" to="." method="on_tween_step"]
