@@ -35,6 +35,8 @@ func on_apply_pressed():
 		data.hand.remove(discard_id)
 	marked_to_discard = []
 
+	data.old_values = data.values.duplicate()
+	data.old_traits = data.traits.duplicate()
 	if data.selected_card.one_time_effect:
 		if typeof(data.selected_card.one_time_effect) == TYPE_OBJECT:
 			data.selected_card.one_time_effect.call_func(data.values, data.traits)

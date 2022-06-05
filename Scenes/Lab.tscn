@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://Resources/Menu.theme" type="Theme" id=1]
 [ext_resource path="res://Sources/Lab.gd" type="Script" id=2]
 [ext_resource path="res://Resources/SmallFont.tres" type="DynamicFont" id=3]
-[ext_resource path="res://Assets/scientist.png" type="Texture" id=4]
+[ext_resource path="res://Assets/scientist-day.png" type="Texture" id=4]
 [ext_resource path="res://Scenes/Card.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Assets/scientist-night.png" type="Texture" id=6]
 
 [node name="Lab" type="Node2D"]
 script = ExtResource( 2 )
@@ -17,6 +18,18 @@ color = Color( 0.227451, 0.25098, 0.278431, 1 )
 __meta__ = {
 "_edit_lock_": true
 }
+
+[node name="Opponent" type="Node2D" parent="."]
+position = Vector2( 1332, -166 )
+
+[node name="day" type="Sprite" parent="Opponent"]
+visible = false
+position = Vector2( 246, 663 )
+texture = ExtResource( 4 )
+
+[node name="night" type="Sprite" parent="Opponent"]
+position = Vector2( 339, 595 )
+texture = ExtResource( 6 )
 
 [node name="Menu" type="Button" parent="."]
 visible = false
@@ -62,7 +75,7 @@ theme = ExtResource( 1 )
 custom_fonts/font = ExtResource( 3 )
 text = "Player SHIFT"
 
-[node name="Opponent" type="Label" parent="."]
+[node name="OpponentLabel" type="Label" parent="."]
 margin_left = 1274.0
 margin_top = 50.0
 margin_right = 1554.0
@@ -130,9 +143,16 @@ margin_bottom = 691.0
 [node name="Card" parent="DiscardPile" instance=ExtResource( 5 )]
 margin_right = 0.0
 
-[node name="Avatar" type="Sprite" parent="."]
-position = Vector2( 350, 643 )
+[node name="You" type="Node2D" parent="."]
+
+[node name="day" type="Sprite" parent="You"]
+visible = false
+position = Vector2( 356, 684 )
 texture = ExtResource( 4 )
+
+[node name="night" type="Sprite" parent="You"]
+position = Vector2( 339, 595 )
+texture = ExtResource( 6 )
 
 [connection signal="pressed" from="Menu" to="." method="on_menu_pressed"]
 [connection signal="pressed" from="GotoControl" to="." method="on_goto_control_pressed"]

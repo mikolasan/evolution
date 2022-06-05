@@ -52,6 +52,11 @@ func set_card(card_id, card):
 	container.get_node("Description").text = card.description
 	set_state("")
 	
+	$HappinessIcon/Label.text = "0"
+	$HungerIcon/Label.text = "0"
+	$DisciplineIcon/Label.text = "0"
+	$TrainingIcon/Label.text = "0"
+	
 	if card.one_time_effect and typeof(card.one_time_effect) == TYPE_STRING:
 		var regex = RegEx.new()
 		regex.compile("(?<meter>\\w+): (?<op>[\\+\\-x])(?<value>\\d+);*")

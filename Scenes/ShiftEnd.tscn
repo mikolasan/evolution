@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=2]
+[gd_scene load_steps=30 format=2]
 
 [ext_resource path="res://Resources/Menu.theme" type="Theme" id=1]
 [ext_resource path="res://Resources/SmallFont.tres" type="DynamicFont" id=2]
@@ -7,12 +7,13 @@
 [ext_resource path="res://Sources/ShiftEnd.gd" type="Script" id=5]
 [ext_resource path="res://Scenes/Card.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Assets/Fonts/Bebas-Regular.ttf" type="DynamicFontData" id=7]
-[ext_resource path="res://Assets/scientist.png" type="Texture" id=8]
+[ext_resource path="res://Assets/scientist-day.png" type="Texture" id=8]
 [ext_resource path="res://addons/imjp94.yafsm/src/StateMachinePlayer.gd" type="Script" id=9]
 [ext_resource path="res://addons/imjp94.yafsm/src/states/State.gd" type="Script" id=10]
 [ext_resource path="res://addons/imjp94.yafsm/src/conditions/Condition.gd" type="Script" id=11]
 [ext_resource path="res://addons/imjp94.yafsm/src/transitions/Transition.gd" type="Script" id=12]
 [ext_resource path="res://addons/imjp94.yafsm/src/states/StateMachine.gd" type="Script" id=13]
+[ext_resource path="res://Assets/scientist-night.png" type="Texture" id=14]
 
 [sub_resource type="DynamicFont" id=1]
 size = 30
@@ -21,7 +22,7 @@ font_data = ExtResource( 7 )
 [sub_resource type="Animation" id=2]
 resource_name = "Show opponent"
 tracks/0/type = "value"
-tracks/0/path = NodePath("OpponentPicture:position")
+tracks/0/path = NodePath("Opponent:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -57,7 +58,7 @@ tracks/2/keys = {
 "values": [ true, true ]
 }
 tracks/3/type = "value"
-tracks/3/path = NodePath("OpponentPicture:visible")
+tracks/3/path = NodePath("Opponent:visible")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/imported = false
@@ -100,19 +101,19 @@ __meta__ = {
 }
 name = "Exit"
 
-[sub_resource type="Resource" id=4]
-script = ExtResource( 10 )
-__meta__ = {
-"graph_offset": Vector2( 347.5, 180 )
-}
-name = "Player"
-
 [sub_resource type="Resource" id=12]
 script = ExtResource( 10 )
 __meta__ = {
 "graph_offset": Vector2( 528, 40 )
 }
 name = "Opponent"
+
+[sub_resource type="Resource" id=4]
+script = ExtResource( 10 )
+__meta__ = {
+"graph_offset": Vector2( 347.5, 180 )
+}
+name = "Player"
 
 [sub_resource type="Resource" id=7]
 script = ExtResource( 11 )
@@ -124,6 +125,19 @@ from = "Entry"
 to = "Player"
 conditions = {
 "player": SubResource( 7 )
+}
+priority = 0
+
+[sub_resource type="Resource" id=15]
+script = ExtResource( 11 )
+name = "player"
+
+[sub_resource type="Resource" id=16]
+script = ExtResource( 12 )
+from = "Opponent"
+to = "Player"
+conditions = {
+"player": SubResource( 15 )
 }
 priority = 0
 
@@ -150,19 +164,6 @@ from = "Player"
 to = "Opponent"
 conditions = {
 "opponent": SubResource( 13 )
-}
-priority = 0
-
-[sub_resource type="Resource" id=15]
-script = ExtResource( 11 )
-name = "player"
-
-[sub_resource type="Resource" id=16]
-script = ExtResource( 12 )
-from = "Opponent"
-to = "Player"
-conditions = {
-"player": SubResource( 15 )
 }
 priority = 0
 
@@ -653,10 +654,10 @@ Two
 Three"
 
 [node name="Card" parent="." instance=ExtResource( 6 )]
-margin_left = 1729.0
-margin_top = 185.0
-margin_right = 2009.0
-margin_bottom = 605.0
+margin_left = 1171.0
+margin_top = 103.0
+margin_right = 1451.0
+margin_bottom = 523.0
 
 [node name="TrainingLabel" type="Label" parent="."]
 margin_left = 664.0
@@ -721,8 +722,16 @@ color = Color( 0.2, 0.819608, 0, 1 )
 [node name="SequenceTimer" type="Timer" parent="."]
 one_shot = true
 
-[node name="OpponentPicture" type="Sprite" parent="."]
+[node name="Opponent" type="Node2D" parent="."]
 position = Vector2( 1551, 614 )
+
+[node name="night" type="Sprite" parent="Opponent"]
+visible = false
+position = Vector2( 39, 0 )
+texture = ExtResource( 14 )
+
+[node name="day" type="Sprite" parent="Opponent"]
+position = Vector2( 25, 102 )
 texture = ExtResource( 8 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
@@ -740,5 +749,16 @@ playback/speed = 2.0
 script = ExtResource( 9 )
 state_machine = SubResource( 11 )
 
+[node name="Next" type="Button" parent="."]
+visible = false
+margin_left = 741.0
+margin_top = 437.0
+margin_right = 1019.0
+margin_bottom = 546.0
+theme = ExtResource( 1 )
+disabled = true
+text = "Next"
+
 [connection signal="timeout" from="SequenceTimer" to="." method="on_timer_timeout"]
 [connection signal="tween_step" from="Tween" to="." method="on_tween_step"]
+[connection signal="pressed" from="Next" to="." method="on_next_pressed"]

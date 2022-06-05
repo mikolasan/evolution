@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://Resources/Menu.theme" type="Theme" id=1]
 [ext_resource path="res://Sources/StartMenu.gd" type="Script" id=2]
-[ext_resource path="res://Assets/scientist.png" type="Texture" id=3]
+[ext_resource path="res://Assets/scientist-day.png" type="Texture" id=3]
+[ext_resource path="res://Assets/scientist-night.png" type="Texture" id=4]
 
 [node name="Start" type="Node2D"]
 script = ExtResource( 2 )
@@ -17,58 +18,63 @@ rect_pivot_offset = Vector2( -136, 24 )
 color = Color( 0.239216, 0.278431, 0.32549, 1 )
 
 [node name="DayBackground" type="ColorRect" parent="."]
-margin_left = 146.0
-margin_top = 43.0
-margin_right = 803.0
-margin_bottom = 932.0
+margin_left = 219.0
+margin_top = 87.0
+margin_right = 735.0
+margin_bottom = 976.0
 rect_pivot_offset = Vector2( -136, 24 )
-color = Color( 0.129412, 0.603922, 0.168627, 1 )
+color = Color( 0.129412, 0.313726, 0.603922, 1 )
 
 [node name="DayShift" type="Button" parent="."]
-margin_left = 521.0
-margin_top = 717.0
-margin_right = 837.0
-margin_bottom = 871.0
+margin_left = 461.0
+margin_top = 752.0
+margin_right = 777.0
+margin_bottom = 906.0
 theme = ExtResource( 1 )
 text = "DAY SHIFT"
 
 [node name="DayDescription" type="Label" parent="."]
-margin_left = 223.0
-margin_top = 87.0
-margin_right = 722.0
-margin_bottom = 636.0
+margin_left = 219.0
+margin_top = 123.0
+margin_right = 699.0
+margin_bottom = 704.0
 theme = ExtResource( 1 )
 text = "Develop good traits in the population that will help them to survive any cataclysm "
 align = 2
 autowrap = true
 
 [node name="NightBackground" type="ColorRect" parent="."]
-margin_left = 962.0
-margin_right = 1633.0
-margin_bottom = 752.0
+margin_left = 888.0
+margin_top = 20.0
+margin_right = 1469.0
+margin_bottom = 772.0
 rect_pivot_offset = Vector2( -136, 24 )
 color = Color( 0.541176, 0.0352941, 0.823529, 1 )
 
 [node name="NightShift" type="Button" parent="."]
-margin_left = 1036.0
-margin_top = 614.0
-margin_right = 1378.0
-margin_bottom = 770.0
+margin_left = 980.0
+margin_top = 734.0
+margin_right = 1322.0
+margin_bottom = 890.0
 theme = ExtResource( 1 )
 text = "NIGHT SHIFT"
 
 [node name="NightDescription" type="Label" parent="."]
-margin_left = 998.0
-margin_top = 22.0
-margin_right = 1551.0
-margin_bottom = 669.0
+margin_left = 934.0
+margin_top = 57.0
+margin_right = 1419.0
+margin_bottom = 704.0
 theme = ExtResource( 1 )
 text = "Prove that life is fragile and nothing can live forever and even small distress can lead to a full extinction"
 autowrap = true
 
 [node name="Day" type="Sprite" parent="."]
-position = Vector2( 110, 616 )
+position = Vector2( 170, 704 )
 texture = ExtResource( 3 )
+
+[node name="Night" type="Sprite" parent="."]
+position = Vector2( 1533, 624 )
+texture = ExtResource( 4 )
 
 [connection signal="pressed" from="DayShift" to="." method="on_day_shift_pressed"]
 [connection signal="pressed" from="NightShift" to="." method="on_night_shift_pressed"]

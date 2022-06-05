@@ -39,8 +39,10 @@ var day_deck = []
 var night_deck = []
 
 var control_data = {
-	values = values,
+	old_values = values,
+	values = values.duplicate(),
 	population_modifiers = meters_affect_population,
+	old_traits = traits.duplicate(),
 	traits = traits,
 	hand = hand,
 	new_cards = [],
@@ -95,6 +97,12 @@ func set_shift(shift):
 	$OpponentShift.text = opponent_shift + " shift"
 	
 	$DayLabel.text = player_shift
+	
+	$You.get_node("day").visible = player_shift == "day"
+	$You.get_node("night").visible = player_shift == "night"
+	
+	$Opponent.get_node("day").visible = opponent_shift == "day"
+	$Opponent.get_node("night").visible = opponent_shift == "night"
 
 func on_menu_pressed():
 	emit_signal("menu_pressed")
@@ -131,8 +139,11 @@ func apply_population_modifiers(data):
 	for meter in data.values:
 		if meter in modifiers:
 			var meter_value = data.values[meter]
-			if meter_value > 0 and meter_value <= 5:
-				population = population + modifiers[meter][meter_value - 1]
+			if meter_value <= 0:
+				meter_value = 1
+			if meter_value > 5:
+				meter_value = 5
+			population = population + modifiers[meter][meter_value - 1]
 	data.values.population = population
 
 func apply_card_effects(card, data):

@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://Scenes/MainMenu.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scenes/StartMenu.tscn" type="PackedScene" id=2]
@@ -7,8 +7,9 @@
 [ext_resource path="res://Scenes/Tamagotchi.tscn" type="PackedScene" id=5]
 [ext_resource path="res://splash.png" type="Texture" id=6]
 [ext_resource path="res://Resources/Menu.theme" type="Theme" id=7]
-[ext_resource path="res://Assets/scenery1.png" type="Texture" id=12]
-[ext_resource path="res://Assets/scenery2.png" type="Texture" id=13]
+[ext_resource path="res://Assets/intro-1.jpg" type="Texture" id=8]
+[ext_resource path="res://Assets/intro-3.jpg" type="Texture" id=9]
+[ext_resource path="res://Assets/intro-2.jpg" type="Texture" id=10]
 [ext_resource path="res://Scenes/ShiftEnd.tscn" type="PackedScene" id=14]
 
 [sub_resource type="Animation" id=15]
@@ -186,7 +187,7 @@ tracks/4/keys = {
 
 [sub_resource type="Animation" id=2]
 resource_name = "Start"
-length = 4.3
+length = 20.0
 tracks/0/type = "value"
 tracks/0/path = NodePath("Curtain:modulate")
 tracks/0/interp = 1
@@ -194,10 +195,10 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.4, 0.8, 1, 1.7, 2.1, 2.6, 2.8, 3.6, 4, 4.3 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"times": PoolRealArray( 0, 0.3, 0.9, 1.2, 2.6, 2.9, 3.4, 3.7, 5.2, 5.5, 6.1, 6.4, 8, 8.3, 8.7, 9.1 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
 "update": 0,
-"values": [ Color( 0, 0, 0, 0 ), Color( 0, 0, 0, 1 ), Color( 0, 0, 0, 1 ), Color( 0, 0, 0, 0 ), Color( 0, 0, 0, 0 ), Color( 0, 0, 0, 1 ), Color( 0, 0, 0, 1 ), Color( 0, 0, 0, 0 ), Color( 0, 0, 0, 0 ), Color( 0, 0, 0, 1 ), Color( 0, 0, 0, 0 ) ]
+"values": [ Color( 0, 0, 0, 0 ), Color( 0, 0, 0, 1 ), Color( 0, 0, 0, 1 ), Color( 0, 0, 0, 0 ), Color( 0, 0, 0, 0 ), Color( 0, 0, 0, 1 ), Color( 0, 0, 0, 1 ), Color( 0, 0, 0, 0 ), Color( 0, 0, 0, 0 ), Color( 0, 0, 0, 1 ), Color( 0, 0, 0, 1 ), Color( 0, 0, 0, 0 ), Color( 0, 0, 0, 0 ), Color( 0, 0, 0, 1 ), Color( 0, 0, 0, 1 ), Color( 0, 0, 0, 0 ) ]
 }
 tracks/1/type = "value"
 tracks/1/path = NodePath("Curtain:visible")
@@ -206,10 +207,10 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0, 1, 1.7, 2.8, 3.6, 4.3 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
+"times": PoolRealArray( 0, 1.2, 2.6, 3.7, 5.2, 6.4, 8, 9.1 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1 ),
 "update": 1,
-"values": [ true, false, true, false, true, false ]
+"values": [ true, false, true, false, true, false, true, false ]
 }
 tracks/2/type = "method"
 tracks/2/path = NodePath(".")
@@ -218,7 +219,7 @@ tracks/2/loop_wrap = true
 tracks/2/imported = false
 tracks/2/enabled = true
 tracks/2/keys = {
-"times": PoolRealArray( 4 ),
+"times": PoolRealArray( 8.7 ),
 "transitions": PoolRealArray( 1 ),
 "values": [ {
 "args": [  ],
@@ -232,7 +233,7 @@ tracks/3/loop_wrap = true
 tracks/3/imported = false
 tracks/3/enabled = true
 tracks/3/keys = {
-"times": PoolRealArray( 0, 0.8, 2.1 ),
+"times": PoolRealArray( 0, 0.9, 2.9 ),
 "transitions": PoolRealArray( 1, 1, 1 ),
 "update": 1,
 "values": [ false, true, false ]
@@ -244,7 +245,7 @@ tracks/4/loop_wrap = true
 tracks/4/imported = false
 tracks/4/enabled = true
 tracks/4/keys = {
-"times": PoolRealArray( 0, 2.6, 4 ),
+"times": PoolRealArray( 0, 3.4, 5.5 ),
 "transitions": PoolRealArray( 1, 1, 1 ),
 "update": 1,
 "values": [ false, true, false ]
@@ -256,10 +257,22 @@ tracks/5/loop_wrap = true
 tracks/5/imported = false
 tracks/5/enabled = true
 tracks/5/keys = {
-"times": PoolRealArray( 0, 1.7 ),
-"transitions": PoolRealArray( 1, 1 ),
+"times": PoolRealArray( 0, 0.3, 5.5 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
 "update": 1,
-"values": [ true, false ]
+"values": [ false, true, false ]
+}
+tracks/6/type = "value"
+tracks/6/path = NodePath("Scenery3:visible")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0, 6.1, 8.3 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ false, true, false ]
 }
 
 [node name="Game" type="Node2D"]
@@ -282,37 +295,46 @@ anims/Splash = SubResource( 1 )
 anims/Start = SubResource( 2 )
 
 [node name="Splash" type="Sprite" parent="."]
-visible = false
 texture = ExtResource( 6 )
 offset = Vector2( 840, 525 )
 
 [node name="Scenery1" type="Sprite" parent="." groups=["Ready"]]
 visible = false
-texture = ExtResource( 12 )
+texture = ExtResource( 8 )
 offset = Vector2( 840, 525 )
 
 [node name="Scenery2" type="Sprite" parent="." groups=["Ready"]]
 visible = false
-texture = ExtResource( 13 )
+texture = ExtResource( 10 )
+offset = Vector2( 840, 525 )
+
+[node name="Scenery3" type="Sprite" parent="." groups=["Ready"]]
+visible = false
+texture = ExtResource( 9 )
 offset = Vector2( 840, 525 )
 
 [node name="Results" parent="." groups=["LabShow", "Ready"] instance=ExtResource( 14 )]
 visible = false
 
 [node name="Curtain" type="ColorRect" parent="."]
-visible = false
-modulate = Color( 0, 0, 0, 0.5 )
+modulate = Color( 0, 0, 0, 0 )
 margin_right = 1680.0
 margin_bottom = 1050.0
 rect_pivot_offset = Vector2( -136, 24 )
 mouse_filter = 2
 color = Color( 0, 0, 0, 1 )
 
-[node name="Hint" type="Label" parent="."]
+[node name="Hint" type="ColorRect" parent="."]
 visible = false
 margin_top = 919.0
 margin_right = 1680.0
 margin_bottom = 1051.0
+theme = ExtResource( 7 )
+color = Color( 0, 0, 0, 0.611765 )
+
+[node name="Hint" type="Label" parent="Hint"]
+margin_right = 1680.0
+margin_bottom = 132.0
 theme = ExtResource( 7 )
 text = "Press SPACE to skip"
 align = 1

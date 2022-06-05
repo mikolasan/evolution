@@ -32,11 +32,14 @@ func _ready():
 	pass
 
 func show_player(control_data):
+	$Next.hide()
+	
 	$StateMachinePlayer.set_trigger("player")
 	$Card.hide()
-	$OpponentPicture.hide()
+	$Opponent.hide()
 	data = control_data
 	update_scene(control_data, control_data.selected_card)
+	start_sequence()
 
 func update_scene(control_data, card):
 	$Population.text = str(control_data.values.population)
@@ -104,20 +107,6 @@ func update_scene(control_data, card):
 		var old_value = old_values[meter] if meter in old_values else null
 		update_scale(meter, old_value, values[meter])
 	$Tween.start()
-	
-	var population_modifiers = control_data.population_modifiers
-	for meter in ["hunger", "happiness", "discipline"]:
-		update_modifiers(meter, population_modifiers[meter], values[meter])
-		var diff = population_modifiers[meter][values[meter] - 1]
-		if diff == 0: continue
-		result_sequence.append({
-			"type": "Population update based on score",
-			"meter_label_text": "population",
-			"meter_change_text": str(diff),
-			"impact": "positive" if diff > 0 else "negative",
-		})
-	
-	start_sequence()
 
 func update_modifiers(scale_name, values, scale_value):
 	var modifiers
@@ -170,8 +159,29 @@ func update_scale(scale_name, value, new_value):
 
 func show_opponent(control_data):
 	$StateMachinePlayer.set_trigger("opponent")
+	$Opponent.get_node("day").visible = control_data.player_shift == "night"
+	$Opponent.get_node("night").visible = control_data.player_shift == "day"
 	$AnimationPlayer.play("Show opponent")
 	update_scene(control_data, control_data.opponent_card)
+	
+	var values = control_data.values
+	var population_modifiers = control_data.population_modifiers
+	for meter in ["hunger", "happiness", "discipline"]:
+		var scale_value = values[meter]
+		if scale_value <= 0:
+			scale_value = 1
+		if scale_value > 5:
+			scale_value = 5
+		update_modifiers(meter, population_modifiers[meter], scale_value)
+		var diff = population_modifiers[meter][scale_value - 1]
+		if diff == 0: continue
+		result_sequence.append({
+			"type": "Population update based on score",
+			"meter_label_text": "population",
+			"meter_change_text": str(diff),
+			"impact": "positive" if diff > 0 else "negative",
+		})
+	start_sequence()
 
 func set_positive_impact():
 	$Particles.gravity = Vector2(0, -98)
@@ -210,7 +220,10 @@ func start_sequence():
 #			for obj in flashing_objects:
 #				obj.modulate = Color("ffffffff")
 #			flashing_objects = []
-			emit_signal("result_shown", "opponent")
+			
+			$Next.show()
+			$Next.disabled = false
+			# emit_signal("result_shown", "opponent")
 		return
 	
 	var result = result_sequence.pop_front()
@@ -242,3 +255,9 @@ func show_opponent_card():
 func hide_opponent_card():
 	print("close_card")
 	$Card.close_card()
+
+func on_next_pressed():
+	if $StateMachinePlayer.get_current() == "Player":
+		emit_signal("result_shown", "player")
+	else:
+		emit_signal("result_shown", "opponent")

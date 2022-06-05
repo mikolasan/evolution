@@ -39,12 +39,12 @@ func show_results(control_data):
 	$Lab.control_data = control_data
 	$Results.show_player(control_data)
 	$Lab.apply_constant_card_effects()
-	$Lab.apply_population_modifiers(control_data)
 	$AnimationPlayer.play("Results")
 
 func on_result_shown(player):
 	if player == "player":
 		$Lab.play_opponent_shift()
+		$Lab.apply_population_modifiers($Lab.control_data)
 		$Results.show_opponent($Lab.control_data)
 	else:
 		$Lab.next_day($Lab.control_data)
