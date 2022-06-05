@@ -7,8 +7,10 @@ func _ready():
 	$Lab.connect("end_day_pressed", self, "next_turn")
 	$Lab.connect("goto_control_pressed", self, "show_control")
 	$Results.connect("result_shown", self, "on_result_shown")
+	$Results.connect("next_pressed", self, "on_next_pressed")
 	$Control.connect("apply_pressed", self, "show_results")
 	$Control.connect("menu_pressed", self, "show_menu")
+	$Results.connect("menu_pressed", self, "show_menu")
 
 	get_tree().call_group_flags(SceneTree.GROUP_CALL_REALTIME, "Ready", "hide")
 	$AnimationPlayer.play("Splash")
@@ -45,6 +47,20 @@ func on_result_shown(player):
 	if player == "player":
 		$Lab.play_opponent_shift()
 		$Lab.apply_population_modifiers($Lab.control_data)
+		$Lab.apply_end_of_day_effects()
+		$Results.show_opponent($Lab.control_data)
+	else:
+		# winning condition
+		var game_end = $Lab.check_winning_condition()
+		if game_end:
+			$Results.get_node("Next").hide()
+			$Results.show_final_result(game_end.flag)
+
+func on_next_pressed(player):
+	if player == "player":
+		$Lab.play_opponent_shift()
+		$Lab.apply_population_modifiers($Lab.control_data)
+		$Lab.apply_end_of_day_effects()
 		$Results.show_opponent($Lab.control_data)
 	else:
 		$Lab.next_day($Lab.control_data)
@@ -76,6 +92,6 @@ func on_player_animation_finished(anim_name):
 func _input(event):
 	if event is InputEventKey and event.scancode == KEY_SPACE:
 		if $AnimationPlayer.current_animation == "Start":
-			$AnimationPlayer.advance(4)
+			$AnimationPlayer.advance(8.5)
 		elif $Results.visible and $Results.shown:
 			$AnimationPlayer.play("Next day")

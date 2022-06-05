@@ -14,31 +14,31 @@ var day_shift = [
 		"title":"Hermaphroditism",
 		"type": "Reproduction",
 		"description": "Population is not affected if Distress card targets only one gender",
-		"one_time_effect": null,
+		"one_time_effect": "training: +1; population: +10",
 		"constant_effect": "hermaphroditism",
 	},
 
 	{
 		"title":"Androdioecy",
 		"type": "Reproduction",
-		"description": "Version of hermaphroditism. Population is not affected if Distress card targets only one gender. Instant effect: double the population",
-		"one_time_effect": "population: x2",
+		"description": "Version of hermaphroditism. Population is not affected if Distress card targets only one gender",
+		"one_time_effect": "training: +1; population: +10",
 		"constant_effect": "hermaphroditism",
 	},
 
 	{
 		"title":"Gynodioecy",
 		"type": "Reproduction",
-		"description": "Version of hermaphroditism. Population is not affected if Distress card targets only one gender. Instant effect: double the population",
-		"one_time_effect": "population: x2",
+		"description": "Version of hermaphroditism. Population is not affected if Distress card targets only one gender",
+		"one_time_effect": "training: +1; population: +10",
 		"constant_effect": "hermaphroditism",
 	},
 
 	{
 		"title":"Trioecy",
 		"type": "Reproduction",
-		"description": "Version of hermaphroditism. Population is not affected if Distress card targets only one gender. Instant effect: double the population",
-		"one_time_effect": "population: x2",
+		"description": "Version of hermaphroditism. Population is not affected if Distress card targets only one gender",
+		"one_time_effect": "training: +1; population: +10",
 		"constant_effect": "hermaphroditism",
 	},
 
@@ -46,7 +46,7 @@ var day_shift = [
 		"title":"Fragmentation",
 		"type": "Reproduction",
 		"description": "Vulnerable to changing environments, parasites",
-		"one_time_effect": null,
+		"one_time_effect": "training: +1; population: +10",
 		"constant_effect": "fragmentation",
 	},
 
@@ -54,7 +54,7 @@ var day_shift = [
 		"title":"Gills",
 		"type": "Breath",
 		"description": "Breathe underwater, always covered with moist on the ground",
-		"one_time_effect": null,
+		"one_time_effect": "training: +1",
 		"constant_effect": "gills",
 	},
 
@@ -62,7 +62,7 @@ var day_shift = [
 		"title":"Skin Breathing",
 		"type": "Breath",
 		"description": "Cutaneous respiration which is breathe with skin, so simply speaking no lungs involved",
-		"one_time_effect": null,
+		"one_time_effect": "training: +1",
 		"constant_effect": "thin skin",
 	},
 
@@ -70,7 +70,7 @@ var day_shift = [
 		"title":"Lungs",
 		"type": "Breath",
 		"description": "Breathe with oxygen",
-		"one_time_effect": null,
+		"one_time_effect": "training: +1",
 		"constant_effect": "lungs",
 	},
 
@@ -78,7 +78,7 @@ var day_shift = [
 		"title":"Immune response",
 		"type": "Immune",
 		"description": "Viruses has no affect",
-		"one_time_effect": null,
+		"one_time_effect": "happiness: +1; discipline +1",
 		"constant_effect": "immune",
 	},
 
@@ -137,7 +137,7 @@ var day_shift = [
 		"title":"Xylophagous",
 		"type": "Nutrition",
 		"description": "Diet consists of wood",
-		"one_time_effect": null,
+		"one_time_effect": "hunger: +3",
 		"constant_effect": "xylophagous",
 	},
 
@@ -153,7 +153,7 @@ var day_shift = [
 		"title":"Mimicry",
 		"type": "Deterrent",
 		"description": "Antipredator adaptation. +10 population",
-		"one_time_effect": "population: +10",
+		"one_time_effect": "discipline: +1; population: +10",
 		"constant_effect": null,
 	},
 
@@ -161,7 +161,7 @@ var day_shift = [
 		"title":"Camouflage",
 		"type": "Deterrent",
 		"description": "Antipredator adaptation. +10 population",
-		"one_time_effect": "population: +10",
+		"one_time_effect": "discipline: +1; population: +10",
 		"constant_effect": null,
 	},
 
@@ -177,7 +177,7 @@ var day_shift = [
 		"title":"Thorns",
 		"type": "Deterrent",
 		"description": "Population protected from predators",
-		"one_time_effect": null,
+		"one_time_effect": "discipline: +2",
 		"constant_effect": "deterrent",
 	},
 
@@ -218,8 +218,8 @@ var night_shift = [
 	{
 		"title":"Asteroid",
 		"type": "Environment Impact",
-		"description": "-10 population -2 hunger",
-		"one_time_effect": "population: -10; hunger: -2",
+		"description": "Someone got hurt. Dust everywhere in the air, now it's harder to find food",
+		"one_time_effect": "population: -20; hunger: -2",
 		"constant_effect": null,
 	},
 
@@ -254,7 +254,7 @@ var night_shift = [
 		"title":"Hematophagy",
 		"type": "Nutrition",
 		"description": "Vampire trait - has to consume blood to feed their hunger. Hunger -1 on every day",
-		"one_time_effect": null,
+		"one_time_effect": "happiness: +2",
 		"constant_effect": funcref(self, "hematophagy_func"),
 		"constant_effect_description": "Hunger -1 on every day",
 		"constant_effect_meter": "hunger",
@@ -289,7 +289,214 @@ var night_shift = [
 		"title":"Parasites",
 		"type": "Nutrition",
 		"description": "They make you to eat more",
+		"one_time_effect": "hunger: -2",
+		"constant_effect": null,
+	},
+
+	{
+		"title":"Global warming",
+		"type": "Environment Impact",
+		"description": "You are a small worm on this planet, how are you going to change climate alone? It's depressing",
+		"one_time_effect": "happiness: -1",
+		"constant_effect": null,
+	},
+
+	{
+		"title":"Heterotrophism",
+		"type": "Nutrition",
+		"description": "Cannot produce nutrition by itself, must consume plants or animals",
 		"one_time_effect": "hunger: -1",
+		"constant_effect": null,
+	},
+
+	{
+		"title":"Global flood",
+		"type": "Environment Impact",
+		"description": "You jump on a boat, but after that you are in the new place without old friends",
+		"one_time_effect": "happiness: -1; discipline: -1",
+		"constant_effect": null,
+	},
+	
+	# copy of the deck (1)
+	{
+		"title":"Asteroid",
+		"type": "Environment Impact",
+		"description": "Someone got hurt. Dust everywhere in the air, now it's harder to find food",
+		"one_time_effect": "population: -20; hunger: -2",
+		"constant_effect": null,
+	},
+
+	{
+		"title":"Virus",
+		"type": "Immune",
+		"description": "Virus incorporates its DNA into the host system and alters it. Randomly remove one trait. Does nothing if the population is immune",
+		"one_time_effect": funcref(self, "virus_func"),
+		"constant_effect": null,
+	},
+
+	{
+		"title":"Plague",
+		"type": "Breath",
+		"description": "Population becomes 10 or 1 if current population was 10. Not affecting if population has no lungs",
+		"one_time_effect": funcref(self, "plague_func"),
+		"constant_effect": null,
+		"one_time_effect_description": "Population becomes 10 or 1 if current population was 10",
+		"one_time_effect_meter": "population",
+		"one_time_effect_impact": "negative",
+	},
+
+	{
+		"title":"Ice Age",
+		"type": "Environment Impact",
+		"description": "Population of giants dies.",
+		"one_time_effect": "hunger: -2",
+		"constant_effect": null,
+	},
+
+	{
+		"title":"Hematophagy",
+		"type": "Nutrition",
+		"description": "Vampire trait - has to consume blood to feed their hunger. Hunger -1 on every day",
+		"one_time_effect": "happiness: +2",
+		"constant_effect": funcref(self, "hematophagy_func"),
+		"constant_effect_description": "Hunger -1 on every day",
+		"constant_effect_meter": "hunger",
+		"constant_effect_impact": "negative",
+	},
+
+	{
+		"title":"GMO",
+		"type": "Interference",
+		"description": "Genetic recombination. It's time to apply extracurricular DNA samples of pink hair and scaly tail",
+		"one_time_effect": funcref(self, "genetic_recombination_func"),
+		"constant_effect": null,
+	},
+
+	{
+		"title":"Appulse",
+		"type": "Environment Impact",
+		"description": "Parade of the planets. Once in a million years Mercury, Venus, Mars, Jupiter and Saturn all lined up in Space which causes a gravitational effect equal to influence of x10 Moons. Discipline -2",
+		"one_time_effect": "discipline: -3",
+		"constant_effect": null,
+	},
+
+	{
+		"title":"Giants",
+		"type": "Locomotion",
+		"description": "Slow, but mighty",
+		"one_time_effect": "hunger: -1",
+		"constant_effect": "giants",
+	},
+
+	{
+		"title":"Parasites",
+		"type": "Nutrition",
+		"description": "They make you to eat more",
+		"one_time_effect": "hunger: -2",
+		"constant_effect": null,
+	},
+
+	{
+		"title":"Global warming",
+		"type": "Environment Impact",
+		"description": "You are a small worm on this planet, how are you going to change climate alone? It's depressing",
+		"one_time_effect": "happiness: -1",
+		"constant_effect": null,
+	},
+
+	{
+		"title":"Heterotrophism",
+		"type": "Nutrition",
+		"description": "Cannot produce nutrition by itself, must consume plants or animals",
+		"one_time_effect": "hunger: -1",
+		"constant_effect": null,
+	},
+
+	{
+		"title":"Global flood",
+		"type": "Environment Impact",
+		"description": "You jump on a boat, but after that you are in the new place without old friends",
+		"one_time_effect": "happiness: -1; discipline: -1",
+		"constant_effect": null,
+	},
+	
+	# copy of the deck (2)
+	
+	{
+		"title":"Asteroid",
+		"type": "Environment Impact",
+		"description": "Someone got hurt. Dust everywhere in the air, now it's harder to find food",
+		"one_time_effect": "population: -20; hunger: -2",
+		"constant_effect": null,
+	},
+
+	{
+		"title":"Virus",
+		"type": "Immune",
+		"description": "Virus incorporates its DNA into the host system and alters it. Randomly remove one trait. Does nothing if the population is immune",
+		"one_time_effect": funcref(self, "virus_func"),
+		"constant_effect": null,
+	},
+
+	{
+		"title":"Plague",
+		"type": "Breath",
+		"description": "Population becomes 10 or 1 if current population was 10. Not affecting if population has no lungs",
+		"one_time_effect": funcref(self, "plague_func"),
+		"constant_effect": null,
+		"one_time_effect_description": "Population becomes 10 or 1 if current population was 10",
+		"one_time_effect_meter": "population",
+		"one_time_effect_impact": "negative",
+	},
+
+	{
+		"title":"Ice Age",
+		"type": "Environment Impact",
+		"description": "Population of giants dies.",
+		"one_time_effect": "hunger: -2",
+		"constant_effect": null,
+	},
+
+	{
+		"title":"Hematophagy",
+		"type": "Nutrition",
+		"description": "Vampire trait - has to consume blood to feed their hunger. Hunger -1 on every day",
+		"one_time_effect": "happiness: +2",
+		"constant_effect": funcref(self, "hematophagy_func"),
+		"constant_effect_description": "Hunger -1 on every day",
+		"constant_effect_meter": "hunger",
+		"constant_effect_impact": "negative",
+	},
+
+	{
+		"title":"GMO",
+		"type": "Interference",
+		"description": "Genetic recombination. It's time to apply extracurricular DNA samples of pink hair and scaly tail",
+		"one_time_effect": funcref(self, "genetic_recombination_func"),
+		"constant_effect": null,
+	},
+
+	{
+		"title":"Appulse",
+		"type": "Environment Impact",
+		"description": "Parade of the planets. Once in a million years Mercury, Venus, Mars, Jupiter and Saturn all lined up in Space which causes a gravitational effect equal to influence of x10 Moons. Discipline -2",
+		"one_time_effect": "discipline: -3",
+		"constant_effect": null,
+	},
+
+	{
+		"title":"Giants",
+		"type": "Locomotion",
+		"description": "Slow, but mighty",
+		"one_time_effect": "hunger: -1",
+		"constant_effect": "giants",
+	},
+
+	{
+		"title":"Parasites",
+		"type": "Nutrition",
+		"description": "They make you to eat more",
+		"one_time_effect": "hunger: -2",
 		"constant_effect": null,
 	},
 

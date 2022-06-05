@@ -1,6 +1,8 @@
 extends Node2D
 
 signal result_shown(player)
+signal next_pressed(player)
+signal menu_pressed
 
 onready var hunger_texture: Texture = load("res://Assets/meter_hunger.png")
 onready var happiness_texture: Texture = load("res://Assets/meter_happiness.png")
@@ -221,9 +223,9 @@ func start_sequence():
 #				obj.modulate = Color("ffffffff")
 #			flashing_objects = []
 			
+			emit_signal("result_shown", "opponent")
 			$Next.show()
 			$Next.disabled = false
-			# emit_signal("result_shown", "opponent")
 		return
 	
 	var result = result_sequence.pop_front()
@@ -258,6 +260,17 @@ func hide_opponent_card():
 
 func on_next_pressed():
 	if $StateMachinePlayer.get_current() == "Player":
-		emit_signal("result_shown", "player")
+		emit_signal("next_pressed", "player")
 	else:
-		emit_signal("result_shown", "opponent")
+		emit_signal("next_pressed", "opponent")
+
+func show_final_result(flag):
+	if flag:
+		$Final/Message.text = "You win"
+	else:
+		$Final/Message.text = "You lose"
+	$Final.show()
+
+func on_menu_pressed():
+	$Final.hide()
+	emit_signal("menu_pressed")

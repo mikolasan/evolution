@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=2]
+[gd_scene load_steps=36 format=2]
 
 [ext_resource path="res://Resources/Menu.theme" type="Theme" id=1]
 [ext_resource path="res://Resources/SmallFont.tres" type="DynamicFont" id=2]
@@ -14,6 +14,11 @@
 [ext_resource path="res://addons/imjp94.yafsm/src/transitions/Transition.gd" type="Script" id=12]
 [ext_resource path="res://addons/imjp94.yafsm/src/states/StateMachine.gd" type="Script" id=13]
 [ext_resource path="res://Assets/scientist-night.png" type="Texture" id=14]
+[ext_resource path="res://Assets/button1-mask.png" type="BitMap" id=15]
+[ext_resource path="res://Assets/button1-normal.png" type="Texture" id=16]
+[ext_resource path="res://Assets/button1-pressed.png" type="Texture" id=17]
+[ext_resource path="res://Assets/button1-hover.png" type="Texture" id=18]
+[ext_resource path="res://Assets/main-background-desk.png" type="Texture" id=19]
 
 [sub_resource type="DynamicFont" id=1]
 size = 30
@@ -189,14 +194,23 @@ transitions = {
 }
 }
 
+[sub_resource type="DynamicFont" id=18]
+size = 120
+use_filter = true
+font_data = ExtResource( 7 )
+
 [node name="Results" type="Node2D"]
 script = ExtResource( 5 )
+
+[node name="Sprite" type="Sprite" parent="."]
+texture = ExtResource( 19 )
+centered = false
 
 [node name="Background" type="ColorRect" parent="."]
 margin_right = 1680.0
 margin_bottom = 1050.0
 rect_pivot_offset = Vector2( -136, 24 )
-color = Color( 0.227451, 0.25098, 0.278431, 1 )
+color = Color( 0.227451, 0.25098, 0.278431, 0.631373 )
 __meta__ = {
 "_edit_lock_": true
 }
@@ -749,7 +763,7 @@ playback/speed = 2.0
 script = ExtResource( 9 )
 state_machine = SubResource( 11 )
 
-[node name="Next" type="Button" parent="."]
+[node name="Next" type="TextureButton" parent="."]
 visible = false
 margin_left = 741.0
 margin_top = 437.0
@@ -757,8 +771,67 @@ margin_right = 1019.0
 margin_bottom = 546.0
 theme = ExtResource( 1 )
 disabled = true
+texture_normal = ExtResource( 16 )
+texture_pressed = ExtResource( 17 )
+texture_hover = ExtResource( 18 )
+texture_click_mask = ExtResource( 15 )
+
+[node name="Label" type="Label" parent="Next"]
+margin_left = 91.0
+margin_top = 20.0
+margin_right = 366.0
+margin_bottom = 144.0
+theme = ExtResource( 1 )
+custom_colors/font_color = Color( 0.192157, 0.188235, 0.188235, 1 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_constants/shadow_offset_x = 2
+custom_constants/shadow_offset_y = 2
 text = "Next"
+
+[node name="Final" type="ColorRect" parent="."]
+visible = false
+margin_right = 1680.0
+margin_bottom = 1050.0
+rect_pivot_offset = Vector2( -136, 24 )
+color = Color( 0, 0, 0, 0.690196 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Message" type="Label" parent="Final"]
+margin_top = 437.0
+margin_right = 1680.0
+margin_bottom = 671.0
+theme = ExtResource( 1 )
+custom_colors/font_color = Color( 1, 0, 0, 1 )
+custom_fonts/font = SubResource( 18 )
+text = "Population"
+align = 1
+
+[node name="Menu" type="TextureButton" parent="Final"]
+margin_left = 644.0
+margin_top = 846.0
+margin_right = 1020.0
+margin_bottom = 1022.0
+theme = ExtResource( 1 )
+texture_normal = ExtResource( 16 )
+texture_pressed = ExtResource( 17 )
+texture_hover = ExtResource( 18 )
+texture_click_mask = ExtResource( 15 )
+
+[node name="Label" type="Label" parent="Final/Menu"]
+margin_left = 93.0
+margin_top = 16.0
+margin_right = 368.0
+margin_bottom = 140.0
+theme = ExtResource( 1 )
+custom_colors/font_color = Color( 0.192157, 0.188235, 0.188235, 1 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_constants/shadow_offset_x = 2
+custom_constants/shadow_offset_y = 2
+text = "Menu"
 
 [connection signal="timeout" from="SequenceTimer" to="." method="on_timer_timeout"]
 [connection signal="tween_step" from="Tween" to="." method="on_tween_step"]
 [connection signal="pressed" from="Next" to="." method="on_next_pressed"]
+[connection signal="pressed" from="Final/Menu" to="." method="on_menu_pressed"]

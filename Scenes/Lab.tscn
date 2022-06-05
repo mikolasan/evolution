@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://Resources/Menu.theme" type="Theme" id=1]
 [ext_resource path="res://Sources/Lab.gd" type="Script" id=2]
@@ -6,15 +6,24 @@
 [ext_resource path="res://Assets/scientist-day.png" type="Texture" id=4]
 [ext_resource path="res://Scenes/Card.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Assets/scientist-night.png" type="Texture" id=6]
+[ext_resource path="res://Assets/button1-mask.png" type="BitMap" id=7]
+[ext_resource path="res://Assets/button1-normal.png" type="Texture" id=8]
+[ext_resource path="res://Assets/button1-pressed.png" type="Texture" id=9]
+[ext_resource path="res://Assets/button1-hover.png" type="Texture" id=10]
+[ext_resource path="res://Assets/main-background-desk.png" type="Texture" id=11]
 
 [node name="Lab" type="Node2D"]
 script = ExtResource( 2 )
+
+[node name="Sprite" type="Sprite" parent="."]
+texture = ExtResource( 11 )
+centered = false
 
 [node name="Background" type="ColorRect" parent="."]
 margin_right = 1680.0
 margin_bottom = 1050.0
 rect_pivot_offset = Vector2( -136, 24 )
-color = Color( 0.227451, 0.25098, 0.278431, 1 )
+color = Color( 0.227451, 0.25098, 0.278431, 0.631373 )
 __meta__ = {
 "_edit_lock_": true
 }
@@ -40,13 +49,29 @@ margin_bottom = 142.0
 theme = ExtResource( 1 )
 text = "MENU"
 
-[node name="GotoControl" type="Button" parent="."]
+[node name="GotoControl" type="TextureButton" parent="."]
 margin_left = 635.0
 margin_top = 497.0
-margin_right = 938.0
-margin_bottom = 619.0
+margin_right = 1011.0
+margin_bottom = 673.0
+rect_pivot_offset = Vector2( -1451, -384 )
 theme = ExtResource( 1 )
-text = "Do work"
+texture_normal = ExtResource( 8 )
+texture_pressed = ExtResource( 9 )
+texture_hover = ExtResource( 10 )
+texture_click_mask = ExtResource( 7 )
+
+[node name="Label" type="Label" parent="GotoControl"]
+margin_left = 31.0
+margin_top = 26.0
+margin_right = 339.0
+margin_bottom = 150.0
+theme = ExtResource( 1 )
+custom_colors/font_color = Color( 0.192157, 0.188235, 0.188235, 1 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_constants/shadow_offset_x = 2
+custom_constants/shadow_offset_y = 2
+text = "Goto Work"
 
 [node name="EndDay" type="Button" parent="."]
 visible = false

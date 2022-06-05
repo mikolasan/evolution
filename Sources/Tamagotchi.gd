@@ -22,6 +22,7 @@ var marked_to_discard = []
 var data = {
 	selected_card = null
 }
+var last_hint_trigger = null
 
 func _ready():
 	for i in $Hand.get_child_count():
@@ -29,6 +30,11 @@ func _ready():
 		card_object.connect("card_selected", self, "on_card_selected", [i])
 		card_object.connect("card_revealed", self, "on_card_revealed", [i])
 	$Status.text = "Drawing cards for new hand..."
+
+func _input(event):
+	if event is InputEventMouseMotion:
+		var mouse_position = get_local_mouse_position()
+#		printt("input", mouse_position)
 
 func on_apply_pressed():
 	for discard_id in marked_to_discard:
@@ -107,6 +113,8 @@ func update_scene(day, control_data):
 	marked_to_discard = []
 	$Status.text = "Select a card to play at this " + control_data.player_shift
 	$Apply.disabled = true
+	$Hint.hide()
+	last_hint_trigger = null
 	
 	animate_card_drawing()
 
@@ -185,3 +193,86 @@ func on_card_selected(card_id):
 
 func on_card_revealed(card_id):
 	animate_card_drawing()
+
+const h_offset = 10
+const v_offset = 10
+
+func show_hint(hint_area, message):
+	if message == "": return
+	
+	var hint = $Hint
+	hint.text = message
+	hint.rect_size.y = hint.get_line_height() * hint.get_line_count()
+	hint.show()
+	
+	var card_size = hint.rect_size
+	var mouse_position = hint_area.get_global_mouse_position()
+	var p = mouse_position + Vector2(-(card_size.x/2.0), v_offset)
+	var window_size = $Background.rect_size
+	if p.x + card_size.x > window_size.x:
+		p.x = window_size.x - card_size.x - h_offset
+	elif p.x < 0:
+		p.x = h_offset
+	if p.y + card_size.y > window_size.y:
+		p.y = mouse_position.y - card_size.y - v_offset
+#	printt("show_hint", hint_area.get_path(), mouse_position, card_size, p, window_size)
+	hint.rect_position = p
+
+	last_hint_trigger = hint_area
+
+func hide_hint(hint_area):
+	var mouse_position = hint_area.get_local_mouse_position()
+#	printt("hide_hint", hint_area.get_path(), mouse_position, hint_area.rect_size)
+	
+	if not Rect2(Vector2(), hint_area.rect_size).has_point(mouse_position):
+		$Hint.hide()
+		last_hint_trigger = null
+
+func on_hunger_mouse_entered():
+	var message = """When you have 5 Hunger at the end of opponent's turn, then Discipline increases by 1.
+	Number below the square shows how the current value will affect population at the end of opponnet's turn"""
+	show_hint($HungerIcon/HintArea, message)
+
+func on_hunger_mouse_exited():
+	hide_hint($HungerIcon/HintArea)
+
+func on_happiness_mouse_entered():
+	var message = """When you have 5 Happiness at the end of opponent's turn, then Discipline increases by 2.
+	Number below the square shows how the current value will affect population at the end of opponnet's turn"""
+	show_hint($HappinessIcon/HintArea, message)
+
+func on_happiness_mouse_exited():
+	hide_hint($HappinessIcon/HintArea)
+
+func on_discipline_mouse_entered():
+	var message = """When you have 5 Discipline at the end of opponent's turn, then Training increases by 1.
+	Number below the square shows how the current value will affect population at the end of opponnet's turn"""
+	show_hint($DisciplineIcon/HintArea, message)
+
+func on_discipline_mouse_exited():
+	hide_hint($DisciplineIcon/HintArea)
+
+func on_training_mouse_entered():
+	var message = """When Training reaches 5, then the day shift wins and the game ends"""
+	show_hint($TrainingIcon/HintArea, message)
+
+func on_training_mouse_exited():
+	hide_hint($TrainingIcon/HintArea)
+
+func on_population_mouse_entered():
+	var message = "Population over 80 requires more food than exists in the environment, which causes hunger to grow (-1) every turn"
+	show_hint($PopulationLabel/HintArea, message)
+
+func on_population_mouse_exited():
+	hide_hint($PopulationLabel/HintArea)
+
+func on_end_shift_mouse_entered():
+	var message = """When the button is active you can apply your chooice of cards.
+		You need to select one card for the main action,select two cards to discard and then your shift can be over (this button will become active)"""
+	show_hint($Apply/HintArea, message)
+
+func on_end_shift_mouse_exited():
+	hide_hint($Apply/HintArea)
+
+func on_hint_timer_timeout():
+	var mouse_position = get_local_mouse_position()

@@ -1,7 +1,12 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://Resources/Menu.theme" type="Theme" id=1]
 [ext_resource path="res://Sources/MainMenu.gd" type="Script" id=2]
+[ext_resource path="res://Assets/button1-hover.png" type="Texture" id=3]
+[ext_resource path="res://Assets/button1-normal.png" type="Texture" id=4]
+[ext_resource path="res://Assets/main-background-desk.png" type="Texture" id=5]
+[ext_resource path="res://Assets/button1-pressed.png" type="Texture" id=6]
+[ext_resource path="res://Assets/button1-mask.png" type="BitMap" id=7]
 
 [node name="Main" type="Node2D"]
 script = ExtResource( 2 )
@@ -11,31 +16,65 @@ margin_right = 1680.0
 margin_bottom = 1050.0
 color = Color( 0.227451, 0.25098, 0.278431, 1 )
 
+[node name="Sprite" type="Sprite" parent="."]
+texture = ExtResource( 5 )
+centered = false
+
 [node name="MarginContainer" type="MarginContainer" parent="."]
 margin_left = 960.0
 margin_top = 340.0
-margin_right = 1410.0
+margin_right = 1318.0
 margin_bottom = 868.0
 
 [node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
-margin_right = 450.0
+margin_right = 376.0
 margin_bottom = 528.0
 custom_constants/separation = 50
 alignment = 2
 
-[node name="Start" type="Button" parent="MarginContainer/VBoxContainer"]
-margin_top = 310.0
-margin_right = 450.0
-margin_bottom = 394.0
+[node name="Start" type="TextureButton" parent="MarginContainer/VBoxContainer"]
+margin_top = 126.0
+margin_right = 376.0
+margin_bottom = 302.0
 theme = ExtResource( 1 )
-text = "START"
+texture_normal = ExtResource( 4 )
+texture_pressed = ExtResource( 6 )
+texture_hover = ExtResource( 3 )
+texture_click_mask = ExtResource( 7 )
 
-[node name="Exit" type="Button" parent="MarginContainer/VBoxContainer"]
-margin_top = 444.0
-margin_right = 450.0
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/Start"]
+margin_left = 92.0
+margin_top = 21.0
+margin_right = 275.0
+margin_bottom = 145.0
+theme = ExtResource( 1 )
+custom_colors/font_color = Color( 0.192157, 0.188235, 0.188235, 1 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_constants/shadow_offset_x = 2
+custom_constants/shadow_offset_y = 2
+text = "Start"
+
+[node name="Exit" type="TextureButton" parent="MarginContainer/VBoxContainer"]
+margin_top = 352.0
+margin_right = 376.0
 margin_bottom = 528.0
 theme = ExtResource( 1 )
-text = "EXIT"
+texture_normal = ExtResource( 4 )
+texture_pressed = ExtResource( 6 )
+texture_hover = ExtResource( 3 )
+texture_click_mask = ExtResource( 7 )
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/Exit"]
+margin_left = 113.0
+margin_top = 21.0
+margin_right = 296.0
+margin_bottom = 145.0
+theme = ExtResource( 1 )
+custom_colors/font_color = Color( 0.192157, 0.188235, 0.188235, 1 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_constants/shadow_offset_x = 2
+custom_constants/shadow_offset_y = 2
+text = "Exit"
 
 [connection signal="pressed" from="MarginContainer/VBoxContainer/Start" to="." method="on_start_pressed"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/Exit" to="." method="on_exit_pressed"]

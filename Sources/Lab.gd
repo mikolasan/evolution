@@ -11,7 +11,7 @@ var selected_card = {}
 var constant_cards = []
 var day_shift_cards = Cards.day_shift
 var night_shift_cards = Cards.night_shift
-const INITIAL_POPULATION = 100
+const INITIAL_POPULATION = 50
 const INITIAL_HUNGER = 2
 const INITIAL_HAPPINESS = 1
 const INITIAL_DISCIPLINE = 1
@@ -229,3 +229,36 @@ func play_opponent_shift():
 	# but Im going to keep it here for the balance in the Universe
 #	apply_constant_card_effects()
 #	apply_population_modifiers(control_data)
+
+func apply_end_of_day_effects():
+	# no hunger => better discipline
+	if control_data.values.hunger >= 5:
+		control_data.values.discipline = control_data.values.discipline + 1
+	
+	if control_data.values.happiness >= 5:
+		control_data.values.discipline = control_data.values.discipline + 2
+		
+	if control_data.values.population >= 80:
+		control_data.values.hunger = control_data.values.hunger - 1
+	
+	# best discipline => new training
+	if control_data.values.discipline >= 5:
+		control_data.values.training = control_data.values.training + 1
+
+func check_winning_condition():
+	var win_result = {}
+	if control_data.values.training >= 5:
+		if player_shift == "night":
+			win_result.flag = false
+		else:
+			win_result.flag = true
+	if control_data.values.population <= 0:
+		if player_shift == "night":
+			win_result.flag = true
+		else:
+			win_result.flag = false
+	
+	if "flag" in win_result:
+		return win_result
+	else:
+		return null
