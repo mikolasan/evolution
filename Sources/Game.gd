@@ -3,14 +3,14 @@ extends Node2D
 func _ready():
 	$Main.connect("start_pressed", self, "show_start_menu")
 	$Start.connect("shift_selected", self, "on_shift_selected")
-	$Lab.connect("menu_pressed", self, "show_menu")
+#	$Lab.connect("menu_pressed", self, "show_menu")
 	$Lab.connect("end_day_pressed", self, "next_turn")
 	$Lab.connect("goto_control_pressed", self, "show_control")
 	$Results.connect("result_shown", self, "on_result_shown")
 	$Results.connect("next_pressed", self, "on_next_pressed")
 	$Control.connect("apply_pressed", self, "show_results")
-	$Control.connect("menu_pressed", self, "show_menu")
-	$Results.connect("menu_pressed", self, "show_menu")
+#	$Control.connect("menu_pressed", self, "show_menu")
+	$Results.connect("menu_pressed", self, "show_main_menu")
 
 	get_tree().call_group_flags(SceneTree.GROUP_CALL_REALTIME, "Ready", "hide")
 	$AnimationPlayer.play("Splash")
@@ -27,6 +27,7 @@ func show_main_menu():
 	$Main.show()
 
 func show_start_menu():
+	$Lab.reset_game()
 	$AnimationPlayer.play("Start")
 
 func _show_start_menu():

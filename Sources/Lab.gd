@@ -6,9 +6,6 @@ signal end_day_pressed
 
 var player_shift: String
 var opponent_shift: String
-var discard_pile = []
-var selected_card = {}
-var constant_cards = []
 var day_shift_cards = Cards.day_shift
 var night_shift_cards = Cards.night_shift
 const INITIAL_POPULATION = 50
@@ -25,15 +22,12 @@ var values = {
 	training = INITIAL_TRAINING,
 }
 var meters_affect_population = {
-	hunger = [-20, -10, 0, 20, 10],
-	happiness = [10, 20, 30, 20, 10],
+	hunger = [-20, -10, -5, 15, 10],
+	happiness = [0, 5, 10, 10, 5],
 	discipline = [0, 0, 5, 10, 20],
 }
-var hand = []
-var opponent_hand = []
 const HAND_MAX_N_CARDS = 5
 
-var traits = []
 var day: int
 var day_deck = []
 var night_deck = []
@@ -42,14 +36,14 @@ var control_data = {
 	old_values = values,
 	values = values.duplicate(),
 	population_modifiers = meters_affect_population,
-	old_traits = traits.duplicate(),
-	traits = traits,
-	hand = hand,
+	old_traits = [],
+	traits = [],
+	hand = [],
 	new_cards = [],
-	selected_card = selected_card,
+	selected_card = {},
+	opponent_hand = [],
 	opponent_card = null,
-	discard_pile = discard_pile,
-	constant_cards = constant_cards
+	constant_cards = []
 }
 
 func _ready():
@@ -64,9 +58,15 @@ func reset_game():
 		discipline = INITIAL_DISCIPLINE,
 		training = INITIAL_TRAINING,
 	}
+	control_data.values = values
 	day = 1
 	day_deck = Cards.get_new_deck("day")
 	night_deck = Cards.get_new_deck("night")
+	control_data.traits = []
+	control_data.hand = []
+	control_data.opponent_hand = []
+	control_data.opponent_card = null
+	control_data.constant_cards = []
 
 func update_labels():
 	$Population.text = str(control_data.values.population)
@@ -108,7 +108,7 @@ func on_menu_pressed():
 	emit_signal("menu_pressed")
 
 func on_goto_control_pressed():
-	var new_cards = Cards.draw_cards(HAND_MAX_N_CARDS - hand.size(), get_deck(player_shift))
+	var new_cards = Cards.draw_cards(HAND_MAX_N_CARDS - control_data.hand.size(), get_deck(player_shift))
 	control_data.new_cards = new_cards
 	emit_signal("goto_control_pressed", day, control_data)
 
@@ -204,6 +204,7 @@ class CardSorter:
 		return false
 
 func play_opponent_shift():
+	var opponent_hand = control_data.opponent_hand
 	var cards = Cards.draw_cards(HAND_MAX_N_CARDS - opponent_hand.size(), get_deck(opponent_shift))
 	for card in cards:
 		opponent_hand.append(card)

@@ -326,7 +326,7 @@ visible = false
 texture = ExtResource( 9 )
 offset = Vector2( 840, 525 )
 
-[node name="Results" parent="." groups=["LabShow", "Ready"] instance=ExtResource( 14 )]
+[node name="Results" parent="." groups=["LabShow", "MainMenuShow", "Ready"] instance=ExtResource( 14 )]
 visible = false
 
 [node name="Curtain" type="ColorRect" parent="." groups=["Ready"]]

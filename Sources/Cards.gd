@@ -204,6 +204,7 @@ func plague_func(values, traits):
 		values.population = 1
 	else:
 		values.population = 10
+	values.happiness = values.happiness - 2
 
 func hematophagy_func(values, traits):
 	values.hunger = values.hunger - 1
@@ -245,8 +246,8 @@ var night_shift = [
 	{
 		"title":"Ice Age",
 		"type": "Environment Impact",
-		"description": "Population of giants dies.",
-		"one_time_effect": "hunger: -2",
+		"description": "Cold weather is no joke. Population decreases by 20, hunger grows",
+		"one_time_effect": "hunger: -2, population: -20",
 		"constant_effect": null,
 	},
 
@@ -297,7 +298,7 @@ var night_shift = [
 		"title":"Global warming",
 		"type": "Environment Impact",
 		"description": "You are a small worm on this planet, how are you going to change climate alone? It's depressing",
-		"one_time_effect": "happiness: -1",
+		"one_time_effect": "happiness: -3",
 		"constant_effect": null,
 	},
 
@@ -318,13 +319,13 @@ var night_shift = [
 	},
 	
 	# copy of the deck (1)
-	{
-		"title":"Asteroid",
-		"type": "Environment Impact",
-		"description": "Someone got hurt. Dust everywhere in the air, now it's harder to find food",
-		"one_time_effect": "population: -20; hunger: -2",
-		"constant_effect": null,
-	},
+#	{
+#		"title":"Asteroid",
+#		"type": "Environment Impact",
+#		"description": "Someone got hurt. Dust everywhere in the air, now it's harder to find food",
+#		"one_time_effect": "population: -20; hunger: -2",
+#		"constant_effect": null,
+#	},
 
 	{
 		"title":"Virus",
@@ -348,8 +349,8 @@ var night_shift = [
 	{
 		"title":"Ice Age",
 		"type": "Environment Impact",
-		"description": "Population of giants dies.",
-		"one_time_effect": "hunger: -2",
+		"description": "Cold weather is no joke. Population decreases by 20, hunger grows",
+		"one_time_effect": "hunger: -2, population: -20",
 		"constant_effect": null,
 	},
 
@@ -400,7 +401,7 @@ var night_shift = [
 		"title":"Global warming",
 		"type": "Environment Impact",
 		"description": "You are a small worm on this planet, how are you going to change climate alone? It's depressing",
-		"one_time_effect": "happiness: -1",
+		"one_time_effect": "happiness: -3",
 		"constant_effect": null,
 	},
 
@@ -421,14 +422,14 @@ var night_shift = [
 	},
 	
 	# copy of the deck (2)
-	
-	{
-		"title":"Asteroid",
-		"type": "Environment Impact",
-		"description": "Someone got hurt. Dust everywhere in the air, now it's harder to find food",
-		"one_time_effect": "population: -20; hunger: -2",
-		"constant_effect": null,
-	},
+#
+#	{
+#		"title":"Asteroid",
+#		"type": "Environment Impact",
+#		"description": "Someone got hurt. Dust everywhere in the air, now it's harder to find food",
+#		"one_time_effect": "population: -20; hunger: -2",
+#		"constant_effect": null,
+#	},
 
 	{
 		"title":"Virus",
@@ -452,8 +453,8 @@ var night_shift = [
 	{
 		"title":"Ice Age",
 		"type": "Environment Impact",
-		"description": "Population of giants dies.",
-		"one_time_effect": "hunger: -2",
+		"description": "Cold weather is no joke. Population decreases by 20, hunger grows",
+		"one_time_effect": "hunger: -2, population: -20",
 		"constant_effect": null,
 	},
 
@@ -504,7 +505,7 @@ var night_shift = [
 		"title":"Global warming",
 		"type": "Environment Impact",
 		"description": "You are a small worm on this planet, how are you going to change climate alone? It's depressing",
-		"one_time_effect": "happiness: -1",
+		"one_time_effect": "happiness: -3",
 		"constant_effect": null,
 	},
 
