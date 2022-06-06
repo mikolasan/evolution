@@ -1,5 +1,7 @@
 # See You Later Alligator
 
+![Control panel and players hand](/Screenshots/2022-06-05 23_55_45-Evolution.png)
+
 *Note:* this game was made during **Go Godot Jam 3**
 
 > Whatever happens in the Lab, stays in the Lab.
